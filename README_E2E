@@ -1,0 +1,11 @@
+
+Roadmap wersji 0.1:
+- logowanie do plików/bazy wszystkich komunikatów. Właściwie do klasy XXX z metodą log()... A w klasie niech się dzieje, co che. :)
+- własny wygląd niezłapanego wyjątku - set_exception_handler() - z możliwością zmiany wyglądu komunikatu przez użytkowników
+- możliwość wyłączenia wyjątków w aplikacji produkcyjnej z pozostawieniem zapisywania do plików
+- [odrzucone] wyłączenie wyjątków dla niektórych katalogów
+- konfiguracja ustawień ini_set. Predefiniowane sety ustawień dla debug, test, production
+
+
+DONE:
+- wyjątki uzależnione od error_reporting

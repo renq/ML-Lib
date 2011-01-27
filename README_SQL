@@ -1,0 +1,56 @@
+@TODO
+- UNIT TESTS!
+
+
+2.1.1
+- Fix describe function.
+- rename class ML_(.*)Connection to ML_(.*)SqlConnection
+- new method: ML_SqlConnection::getSettings().
+- new method: ML_Settings::clearPassword().
+- new method: ML_Sql::saveFromRequest()
+
+2.1
+- Parsowanie DSN wyrzucone zostało z konstruktora ML_Sql do klasy ML_SqlSettings.
+- możliwość zmiany escapeIdentifierChar'@author renq
+- cząstkowo dodana obsługa MSSQL na kanwie umierającej biblioteki php_mssql
+
+2.0
+Wersja stabilna.
+Znane problemy:
+- możliwość ustawienia znaku eskejpującego zapytania w kodzie (nie na sztywno w kodzie klasy Connection)
+- poprawić konstruktor klasy Sql (bez ML). Warunki w kodzie to zły pomysł, nowe Connections powinny się doczepiać
+  bezinwazyjnie.
+- zrobić PHPDoc po angielsku, wywalić kod na Githuba
+
+2.0b1
+Dodanie funkcji getEscapeIdentifierCharacter w ML_SqlStrategy zwracającej znak eskejpowania nazw kolumn i tabel.
+
+2.0a3
+Dodana funkcja describe do Connection.
+
+2.0a2
+- Dopisana obsługa bazy MySQL za pomocą funkcji mysql_*
+
+2.0a1
+- Wersja początkowa 2.0. Ma prawie wszystkie możliwości wersji 1 i dodatkowo coś więcej.
+  Na razie brakuje możliwości budowania zapytań (jak SqlQB w wersji 1).
+  Nowości:
+  - obsługa PDO (Na razie działa MySQL i Sqlite)
+  - rozdzielenie zobowiązań klasy i przygotowanie do obsługi dowolnego silnika bazy danych.
+  - Wśród nowych klas możemy wyróżnić: 
+    - ML_Sql, klasa która za pomocą ML_Connection i ML_SqlStrategy wykonuje zapytania do bazy.
+      Klasa Sql dziedziczy z ML_Sql i jedynie upraszcza sposób łączenia się z bazą.
+    - ML_Connection - klasa odpowiada za połączenie do bazy danych. 
+      Definiuje interfejs, który może posłużyć do obsługi dowonego silnika bazy w PHP.
+      ML_Connection implementuje wzorzec projektowy LazyLoad, który powoduje to, że połączenie do bazy
+      nawiązywane jest dopiero podczas pierwszego zapytania.
+    - ML_SqlStrategy - Klasa potrafi wygenerować proste zapytania jak insert, update, delete i select.
+      Jej podklasy obsługują różnice w zapytaniach wśród różnych silników baz danych, np. w przypadku limitowania
+      wyników zapytania (LIMIT n,k w MySQL i LIMIT k OFFSET n w PostrgeSQL).
+      ML_SqlStrategy implementuje wzorzec projektowy Strategy, stąd nazwa.
+    - ML_SqlAutoload oczywiście ładuje automatycznie potrzebne pliki biblioteki.
+    
+  - To, że klasa ML_Sql parametryzowana jest połączeniem i strategią SQL pozwala na modyfikowanie
+    sposobu działania biblioteki bez zmiany w jej kodzie. Np. jeżeli chcielibyśmy cache'ować wyniki zapytań,
+    wystarczy napisać własną klasę implementującą interfejs klasy ML_Connection.
+    
