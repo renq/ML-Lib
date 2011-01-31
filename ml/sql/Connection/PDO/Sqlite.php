@@ -1,7 +1,9 @@
 <?php
 
+namespace ml\sql;
 
-class ML_SqlitePdoSqlConnection extends ML_PdoSqlConnection {
+
+class Connection_PDO_Sqlite extends Connection_PDO {
 	
 	
 	
@@ -21,7 +23,7 @@ class ML_SqlitePdoSqlConnection extends ML_PdoSqlConnection {
 			return true;
 		}
 		catch (PDOException $e) {
-			throw new ML_SqlException('Can\'t open database: '.$e->getMessage()); 
+			throw new Exception('Can\'t open database: '.$e->getMessage()); 
 		}
 	}
 

@@ -1,7 +1,9 @@
 <?php
 
+namespace ml\sql;
 
-class ML_SqliteSqlStrategy extends ML_MysqllikeSqlStrategy {
+
+class Strategy_Sqlite extends Strategy_MySQLLike {
 	
 	
 	public function limit($query, $limit, $offset) {

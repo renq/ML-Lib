@@ -1,7 +1,9 @@
 <?php
 
+namespace ml\sql;
 
-class ML_SqlSettings {
+
+class Settings {
 	
 	
 	private $driver = null;
@@ -21,7 +23,7 @@ class ML_SqlSettings {
 			list($this->dsn, $this->driver, $this->database) = $matches;
 		}
 		else {
-			throw new ML_SqlException("Unknown DSN ($dsn)");
+			throw new Exception("Unknown DSN ($dsn)");
 		}
 	}
 	

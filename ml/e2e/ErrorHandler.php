@@ -25,7 +25,7 @@ class ErrorHandler {
 	
 	
 	public final function __clone() {
-		throw new BadMethodCallException("Clone is not allowed");
+		throw new \BadMethodCallException("Clone is not allowed");
 	}
 	
 	

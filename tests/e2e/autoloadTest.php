@@ -3,7 +3,7 @@
 require_once dirname(__FILE__) . '/../../ml/ml.php';
 
 
-class AutoloadTest extends PHPUnit_Framework_TestCase {
+class E2eAutoloadTest extends PHPUnit_Framework_TestCase {
 	
 	
     public function testAutoload() {

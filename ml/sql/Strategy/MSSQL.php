@@ -1,10 +1,12 @@
 <?php
 
+namespace ml\sql;
 
-class ML_MssqlSqlStrategy extends ML_SqlStrategy {
+
+class Strategy_MSSQL extends Strategy {
 	
 	
-	public function __construct(ML_SqlConnection $connection) {
+	public function __construct(Connection $connection) {
 		parent::__construct($connection);
 		$this->escapeIdentifierCharacter = '"';
 	}
@@ -27,7 +29,7 @@ class ML_MssqlSqlStrategy extends ML_SqlStrategy {
 		$beforeFrom = substr($query, 0, stripos($query, ' FROM '));
 		$afterOrder = stristr($query, 'ORDER BY ');
 		if (!$afterOrder) {
-			throw new ML_SqlException("MSSQL needs ORDER BY in your queries.");
+			throw new Exception("MSSQL needs ORDER BY in your queries.");
 		}
 		$rowNumber = ", ROW_NUMBER() OVER ($afterOrder) AS RowNum "; 
 		

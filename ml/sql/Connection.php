@@ -1,14 +1,16 @@
 <?php
 
+namespace ml\sql;
+
 
 /**
- * ML_SqlConnection is an abstract class corresponds to database connection.
+ * SqlConnection is an abstract class corresponds to database connection.
  * Subclasses to this class implements connection to specific database, ie. MySQL.  
  * . Podklasy odpowiadają za połączenie do konkretnej bazy.
  * @author Michał Lipek (michal@lipek.net)
  * @version 2.0 2010-01-08
  */
-abstract class ML_SqlConnection {
+abstract class Connection {
 	
 	
 	/*
@@ -19,7 +21,7 @@ abstract class ML_SqlConnection {
 	
 	/**
 	 * Settings object generated from DSN string.
-	 * @var ML_SqlSettings
+	 * @var SqlSettings
 	 */
 	protected $settings;
 	
@@ -42,7 +44,7 @@ abstract class ML_SqlConnection {
 	 */
 	public function __construct($dsn) {
 		if ($dsn !== false) {
-			$this->settings = new ML_SqlSettings($dsn);
+			$this->settings = new SqlSettings($dsn);
 		}
 	}
 	
@@ -144,7 +146,7 @@ abstract class ML_SqlConnection {
 	
 	/**
 	 * Returns settings object.
-	 * @return ML_SqlSettings
+	 * @return SqlSettings
 	 */
 	public function getSettings() {
 		return $this->settings;

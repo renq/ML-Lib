@@ -1,5 +1,7 @@
 <?php
 
+namespace ml\sql;
+
 
 /**
  * 
@@ -7,7 +9,7 @@
  * @author Michał Lipek (michal@lipek.net)
  *
  */
-abstract class ML_PdoSqlConnection extends ML_SqlConnection {
+abstract class Connection_PDO extends Connection {
 	
 	protected $handle = null;
 	
@@ -44,16 +46,16 @@ abstract class ML_PdoSqlConnection extends ML_SqlConnection {
 			$numberOfPlaceholders = substr_count($query, '?');
 			$numberOfParams = count($params);
 			if ($numberOfPlaceholders > $numberOfParams) {
-				throw new ML_SqlException("Query error: too few bind parameters; should be $numberOfPlaceholders; $numberOfParams given;\n$query");
+				throw new Exception("Query error: too few bind parameters; should be $numberOfPlaceholders; $numberOfParams given;\n$query");
 			}
 		}
 		catch (PDOException $e) {
 			$query = $this->buildSql($query, $params);
 			if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
-				throw new ML_SqlException('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode(), $e); 
+				throw new Exception('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode(), $e); 
 			}
 			else {
-				throw new ML_SqlException('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode()); 
+				throw new Exception('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode()); 
 			}
 		}
 		return $sth;

@@ -1,5 +1,6 @@
 <?php
 
+use ml\e2e\ErrorHandler;
 require_once dirname(__FILE__) . '/../../ml/ml.php';
 
 
@@ -65,8 +66,22 @@ class ErrorHandlerTest extends PHPUnit_Framework_TestCase {
     	$array = array(1);
     	$array[666];
     	1/0;
-    } 
+    }
     
+	public function testClone() {
+		error_reporting(-1);
+    	$this->setExpectedException('BadMethodCallException');
+    	$instance = ErrorHandler::getInstance();
+    	$clone = clone $instance;
+    }
+    
+    
+	public function testUnknownException() {
+		error_reporting(-1);
+    	$this->setExpectedException('ml\e2e\UnknownException');
+    	ErrorHandler::handler(666, "Fake error", __FILE__, __LINE__, '');
+    }     
+   
  
     
     // These errors are triggered in complie time. It's no way to catch them.

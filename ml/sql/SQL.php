@@ -1,17 +1,19 @@
 <?php
 
+namespace ml\sql;
+
 
 /**
- * ML_Sql class.
+ *  class.
  * @author Michał Lipek (michal@lipek.net)
  * @version 2.0 2010-11-31
  */
-class ML_Sql {
+class SQL {
 
 
 	
 	/**
-	 * @var ML_SqlConnection
+	 * @var Connection
 	 */
 	protected $connection;
 	
@@ -23,10 +25,10 @@ class ML_Sql {
 	
 	/**
 	 * The constructor.
-	 * @param ML_SqlConnection $connection
-	 * @param ML_SqlStrategy $strategy
+	 * @param Connection $connection
+	 * @param Strategy $strategy
 	 */
-	public function __construct(ML_SqlConnection $connection, ML_SqlStrategy $strategy) {
+	public function __construct(Connection $connection, Strategy $strategy) {
 		$this->connection = $connection;
 		$this->strategy = $strategy;
 	}
@@ -184,7 +186,7 @@ class ML_Sql {
 			}
 		}
 		else {
-			throw new ML_SqlException('second parameter must be an associative array!');
+			throw new Exception('second parameter must be an associative array!');
 		}
 	}
 	
@@ -295,7 +297,7 @@ class ML_Sql {
 	
 	/**
 	 * Returns connection object.
-	 * @return ML_SqlConnection
+	 * @return Connection
 	 */
 	public function getConnection() {
 		return $this->connection;
@@ -303,7 +305,7 @@ class ML_Sql {
 	
 	/**
 	 * Returns strategy object.
-	 * @return ML_SqlStrategy
+	 * @return Strategy
 	 */
 	public function getStrategy() {
 		return $this->strategy;

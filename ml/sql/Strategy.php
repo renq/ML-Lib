@@ -1,5 +1,7 @@
 <?php
 
+namespace ml\sql;
+
 
 /**
  * Base Strategy class.
@@ -7,10 +9,10 @@
  * @version 2.0 2010-11-01
  *
  */
-abstract class ML_SqlStrategy {
+abstract class Strategy {
 	
 	/**
-	 * @var ML_SqlConnection
+	 * @var Connection
 	 */
 	protected $connection;
 	
@@ -19,9 +21,9 @@ abstract class ML_SqlStrategy {
 	
 	/**
 	 * Constructor.
-	 * @param ML_SqlConnection $connection
+	 * @param Connection $connection
 	 */
-	public function __construct(ML_SqlConnection $connection) {
+	public function __construct(Connection $connection) {
 		$this->connection = $connection;
 	}
 	

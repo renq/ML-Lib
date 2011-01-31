@@ -1,5 +1,7 @@
 <?php
 
+namespace ml\sql;
+
 
 /**
  * 
@@ -9,7 +11,7 @@
  * 
  *
  */
-class ML_MssqlSqlConnection extends ML_SqlConnection {
+class Connection_MSSQL extends Connection {
 	
 	protected $handle = null;
 	
@@ -21,7 +23,7 @@ class ML_MssqlSqlConnection extends ML_SqlConnection {
 	
 	static public function useCurrent($handle) {
 		$new = null;
-		$new = new ML_MssqlConnection('mssql:///');
+		$new = new Connection_Mssql('mssql:///');
 		$new->handle = $handle;
 		return $new;
 	}
@@ -38,7 +40,7 @@ class ML_MssqlSqlConnection extends ML_SqlConnection {
 		$this->handle = mssql_connect($host, $username, $password);
 		if (!$this->handle) {
 			$msg = error_get_last();
-			throw new ML_SqlException('Can\'t open database: '.$msg['message']);
+			throw new Exception('Can\'t open database: '.$msg['message']);
 		}
 		mssql_select_db($database, $this->handle);
 		mssql_query("SET ANSI_NULLS on;");
@@ -87,14 +89,14 @@ class ML_MssqlSqlConnection extends ML_SqlConnection {
 	}
 	
 	
-	public function query($query, $params = array()) {
+	public function query($query, array $params = array()) {
 		parent::query($query, $params);
 		$this->connect();
 				
 		$n = substr_count($query, '?');
 		$k = count($params);
 		if ($n != $k) {
-			throw new ML_SqlException("Query error: to few bind parameters; should be $n; $k given;\n$query");
+			throw new Exception("Query error: to few bind parameters; should be $n; $k given;\n$query");
 		}
 		$query = str_replace(array('%', '?'), array('%%', '%s'), $query, $count);
 		$params = $this->escapeParams($params);
@@ -103,7 +105,7 @@ class ML_MssqlSqlConnection extends ML_SqlConnection {
 		$result = mssql_query($query, $this->handle);
 		if (!is_resource($result)) {
 			$msg = error_get_last();
-			throw new ML_SqlException("Query error: $query\n\n" . $msg);
+			throw new Exception("Query error: $query\n\n" . $msg);
 		}
 		return $result;
 	}

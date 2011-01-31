@@ -1,7 +1,9 @@
 <?php
 
+namespace ml\sql;
 
-class ML_MysqlPdoSqlConnection extends ML_PdoSqlConnection {
+
+class Connection_PDO_PostgreSQL extends Connection_PDO {
 	
 	
 	
@@ -15,25 +17,22 @@ class ML_MysqlPdoSqlConnection extends ML_PdoSqlConnection {
 		try {
 			$driver = $this->settings->getDriver();
 			$host = $this->settings->getHost();
-			$port = ($port = $this->settings->getPort())?$port:3306;
+			$port = ($port = $this->settings->getPort())?$port:5432;
 			$username = $this->settings->getUsername();
 			$password = $this->settings->getPassword();
 			$database = $this->settings->getDatabase();
 			
 			$this->handle = new PDO("{$driver}:host={$host};port=$port;dbname={$database}", $username, $password);
 			$this->handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$this->handle->query("SET character_set_client=utf8");
-			$this->handle->query("SET character_set_results=utf8");
-			$this->handle->query("SET collation_connection=utf8_bin");
-			$this->handle->query("SET SESSION query_cache_type = ON");
-			$this->settings->clearPassword();;
+			$this->settings->clearPassword();
 			return true;
 		}
 		catch (PDOException $e) {
-			throw new ML_SqlException('Can\'t open database: '.$e->getMessage()); 
+			throw new Exception('Can\'t open database: '.$e->getMessage()); 
 		}
 	}
 	
 	
 } 
+
 

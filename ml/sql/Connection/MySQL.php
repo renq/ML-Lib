@@ -1,7 +1,9 @@
 <?php
 
+namespace ml\sql;
 
-class ML_MysqlSqlConnection extends ML_SqlConnection {
+
+class Connection_MySQL extends Connection {
 	
 	protected $handle = null;
 	
@@ -13,7 +15,7 @@ class ML_MysqlSqlConnection extends ML_SqlConnection {
 	
 	static public function useCurrent($handle) {
 		$new = null;
-		$new = new ML_MysqlConnection('mysql:///');
+		$new = new Connection_Mysql('mysql:///');
 		$new->handle = $handle;
 		return $new;
 	}
@@ -30,7 +32,7 @@ class ML_MysqlSqlConnection extends ML_SqlConnection {
 		
 		$this->handle = mysql_connect($host, $username, $password);
 		if (!$this->handle) {
-			throw new ML_SqlException('Can\'t open database: '.mysql_error());
+			throw new Exception('Can\'t open database: '.mysql_error());
 		}			
 		mysql_query("USE {$database}", $this->handle);
 		mysql_query("SET character_set_client=utf8", $this->handle);
@@ -78,14 +80,14 @@ class ML_MysqlSqlConnection extends ML_SqlConnection {
 	}
 	
 	
-	public function query($query, $params = array()) {
+	public function query($query, array $params = array()) {
 		parent::query($query, $params);
 		$this->connect();
 				
 		$n = substr_count($query, '?');
 		$k = count($params);
 		if ($n != $k) {
-			throw new ML_SqlException("Query error: to few bind parameters; should be $n; $k given;\n$query");
+			throw new Exception("Query error: to few bind parameters; should be $n; $k given;\n$query");
 		}
 		$query = str_replace(array('%', '?'), array('%%', '%s'), $query, $count);
 		$params = $this->escapeParams($params);
@@ -93,7 +95,7 @@ class ML_MysqlSqlConnection extends ML_SqlConnection {
 		
 		$result = mysql_query($query, $this->handle);
 		if (mysql_errno()) {
-			throw new ML_SqlException("Query error: $query\n\n" . mysql_errno($this->handle) . ": " . mysql_error($this->handle));
+			throw new Exception("Query error: $query\n\n" . mysql_errno($this->handle) . ": " . mysql_error($this->handle));
 		}
 		return $result;
 	}

@@ -1,10 +1,12 @@
 <?php
 
+namespace ml\sql;
 
-class ML_MysqlSqlStrategy extends ML_MysqllikeSqlStrategy {
+
+class Strategy_Mysql extends Strategy_MySQLLike {
 	
 	
-	public function __construct(ML_SqlConnection $connection) {
+	public function __construct(Connection $connection) {
 		parent::__construct($connection);
 		$this->escapeIdentifierCharacter = '`';
 	}
