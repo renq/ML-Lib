@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../ml/ml.php';
+require_once __DIR__ . '/../../ml/ml.php';
 
 
 class SqlAutoloadTest extends PHPUnit_Framework_TestCase {

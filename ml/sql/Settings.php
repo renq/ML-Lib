@@ -14,22 +14,38 @@ class Settings {
 	private $database = null;
 	
 	
-	public function __construct($dsn) {
-		$matches = array();
-		if (preg_match('/^([^:]+):\/\/([^:]+):(.*)\@([^\/]+)\/([^:]+)$/', $dsn, $matches)) {
-			list($dsn, $this->driver, $this->username, $this->password, $this->host, $this->database) = $matches;
+	public function __construct($dsn = null) {
+		if ($dsn) {
+			$matches = array();
+			
+			$location = parse_url($dsn);
+			if ($location) {
+				$this->setDriver($location['scheme']);
+				$this->setHost(isset($location['host']) ? $location['host'] : null);
+				$this->setUsername(isset($location['user']) ? $location['user'] : null);
+				$this->setDatabase(isset($location['path']) ? ltrim($location['path'], '/') : null);
+				$this->setPort(isset($location['port']) ? $location['port'] : null);
+				$this->setPassword(isset($location['pass']) ? urldecode($location['pass']) : null);
+			}
+			elseif (preg_match('/^(.*):\/\/\/(.*)$/', $dsn, $matches)) {
+				list($this->dsn, $this->driver, $this->database) = $matches;
+			}
 		}
-		elseif (preg_match('/^(.*):\/\/\/(.*)$/', $dsn, $matches)) {
-			list($this->dsn, $this->driver, $this->database) = $matches;
-		}
-		else {
-			throw new Exception("Unknown DSN ($dsn)");
-		}
+	}
+	
+	
+	public function setDriver($driver) {
+		$this->driver = $driver;
 	}
 	
 	
 	public function getDriver() {
 		return $this->driver;
+	}
+	
+	
+	public function setUsername($username) {
+		$this->username = $username;
 	}
 	
 	
@@ -43,8 +59,18 @@ class Settings {
 	}
 	
 	
+	public function setPassword($password) {
+		$this->password = $password;
+	}
+	
+	
 	public function getHost() {
 		return $this->host;
+	}
+	
+	
+	public function setHost($host) {
+		$this->host = $host;
 	}
 	
 	
@@ -53,8 +79,18 @@ class Settings {
 	}
 	
 	
+	public function setDatabase($database) {
+		$this->database = $database;
+	}
+	
+	
 	public function getPort() {
 		return $this->port;
+	}
+	
+	
+	public function setPort($port) {
+		$this->port = $port;
 	}
 	
 	
@@ -64,4 +100,4 @@ class Settings {
 	
 	
 }
-
+ 
