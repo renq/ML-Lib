@@ -147,6 +147,15 @@ class SettingsTest extends PHPUnit_Framework_TestCase {
     	
     	$this->assertEquals($settings->getPassword(), $password);
     }
+    
+    
+    public function testClearPassword() {
+    	$password = 'god';
+    	$settings = new Settings("mysql://root:$password@localhost/db");
+    	$this->assertEquals($settings->getPassword(), $password);
+    	$settings->clearPassword();
+    	$this->assertNotEquals($settings->getPassword(), $password);
+    }
 
 
 }
