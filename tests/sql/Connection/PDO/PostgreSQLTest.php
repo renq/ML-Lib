@@ -34,6 +34,14 @@ class SqlConnectionPDOPostgreSQLTest extends PHPUnit_Framework_TestCase {
 		$connection = new Connection_PDO_PostgreSQL($settings);
 		$connection->connect();
 	}
+	
+	
+    public function testPasswordHide() {
+    	$password = $this->connection->getSettings()->getPassword();
+    	$this->connection->connect();
+    	$hiddenPassword = $this->connection->getSettings()->getPassword();
+    	$this->assertFalse($password == $hiddenPassword, 'After connect password should be removed from the settings object for security reasons.');
+    }
 
 
 }

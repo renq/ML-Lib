@@ -1,13 +1,14 @@
 <?php
 
-use ml\sql\Connection_PDO_Sqlite;
+use ml\sql\Connection_PDO_MySQL;
+use ml\sql\Connection_MySQL;
 use ml\sql\Settings;
 
 
 require_once dirname(__FILE__) . '../../../../ml/ml.php';
 
 
-class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
+class SqlConnectionMySQLTest extends PHPUnit_Framework_TestCase {
 
 	
 	protected $connection;
@@ -15,35 +16,55 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
 	
 	protected function setUp() {
 		include(__DIR__ . '/../../config.php');
-		$db  = $config['sqlite_db'];
-		unlink($db);
-		$settings = new Settings("sqlite:///$db");
-		$this->connection = new Connection_PDO_Sqlite($settings);
-	}
-	
-	
-	private function createTable() {
+		$db  = $config['mysql_db'];
+		$settings = new Settings($db);
+		$database = $settings->getDatabase();
+		$settings->setDatabase(null);
+		$this->connection = new Connection_MySQL($settings);
+		$this->connection->query("DROP DATABASE IF EXISTS $database;"); 
+		$this->connection->query("CREATE DATABASE $database;");
+		$this->connection->query("USE $database;");
+		$settings->setDatabase($database);
 		$this->connection->query("CREATE TABLE cat (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			id INTEGER PRIMARY KEY AUTO_INCREMENT,
 			name VARCHAR(50),
 			colour VARCHAR(50)
-		)");
+		) ENGINE=InnoDB");
 		$this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array("Simon's Cat", 'black'));
 		$this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array("Garfield", 'ginger'));
 	}
 	
 	
+	protected function tearDown() {
+		$database = $this->connection->getSettings()->getDatabase();
+		$this->connection->query("DROP DATABASE $database");
+	}
+	
+	
+	public function testConnectFail() {
+		$this->setExpectedException('ml\sql\SqlException');
+		$settings = new Settings('mysql://root:fake_pass@localhost/fake_db');
+		$connection = new Connection_MySQL($settings);
+    	$connection->connect();
+    }
+	
+	
 	public function testDisconnect() {
-    	$this->assertNull($this->connection->getHandle());
-    	$this->connection->query("SELECT DATE('now')");
-    	$this->assertTrue(($handle = $this->connection->getHandle()) instanceof PDO, "After connect handle should be instance of PDO, but it is: ".get_class($handle));
-    	$this->connection->disconnect();
-    	$this->assertNull($this->connection->getHandle());
+		include(__DIR__ . '/../../config.php');
+		$db  = $config['mysql_db'];
+		$settings = new Settings($db);
+		$connection = new Connection_MySQL($settings);
+    	$this->assertNull($connection->getHandle());
+    	$connection->query("SELECT NOW()");
+    	$this->assertTrue(is_resource($connection->getHandle()), "After connect handle should be resource, but it is: ".gettype($connection->getHandle()));
+    	$connection->disconnect();
+    	$this->assertNull($connection->getHandle());
+    	
+    	$this->setUp(); // because tearDown makes an error.
     }
     
     
     public function testQuery() {
-		$this->createTable();
 		$statement = $this->connection->query("SELECT * FROM cat");
 		$row = $this->connection->fetch($statement);
 		$this->assertEquals("Simon's Cat", $row['name']);
@@ -53,21 +74,19 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     
     
     public function testQueryTooFewBindFail() {
-    	$this->createTable();
     	$this->setExpectedException('ml\sql\BindException');
     	$this->connection->query("SELECT * FROM cat WHERE name = ?", array());
     }
     
     
 	public function testQueryTooMuchBindFail() {
-    	$this->createTable();
     	$this->setExpectedException('ml\sql\BindException');
     	$this->connection->query("SELECT * FROM cat WHERE name = ?", array('Simon\'s', 'Cat'));
     }
     
     
     public function testEscape() {
-    	$this->assertEquals("'Simon''s Cat'", $this->connection->escape("Simon's Cat"));
+    	$this->assertEquals("'Simon\\'s Cat'", $this->connection->escape("Simon's Cat"));
     	$this->assertEquals(12, $this->connection->escape(12));
     	$this->assertEquals("'0012'", $this->connection->escape('0012'));
     	$this->assertEquals('NULL', strtoupper($this->connection->escape(null)));
@@ -83,7 +102,6 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     
     
 	public function testLastInsertId() {
-		$this->createTable();
     	$this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));
     	$this->assertEquals(3, $this->connection->lastInsertId('cat'));
     	$this->assertEquals(3, $this->connection->lastInsertId());
@@ -93,7 +111,6 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     
     
     public function testTransactionRollback() {
-    	$this->createTable();
     	$this->connection->beginTransaction();
     	$this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));
     	$this->connection->rollback();
@@ -105,7 +122,6 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     
     
 	public function testTransactionCommit() {
-    	$this->createTable();
     	$this->connection->beginTransaction();
     	$this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));
     	$this->connection->commit();
@@ -117,7 +133,6 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     
     
 	public function testFetchEOF() {
-    	$this->createTable();
     	$statement = $this->connection->query("SELECT * FROM cat");
     	$this->connection->fetch($statement); // Simon's Cat
     	$this->connection->fetch($statement); // Garfield
@@ -125,28 +140,11 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     }
     
     
-    public function testBuildQuery() {
-    	$query = "SELECT * FROM cat WHERE name = ?";
-    	$params = array('Garfield');
-    	$expected = "SELECT * FROM cat WHERE name = 'Garfield'";
-    	$build = $this->connection->buildSql($query, $params);
-    	$this->assertEquals($expected, $build);
-    }
-    
-    
-    public function testDebug() {
-    	$this->createTable();
-    	$this->connection->debug = false;
-    	$build = $this->connection->query("SELECT * FROM cat");
-    	$debug = $this->connection->getDebug();
-    	$this->assertTrue(empty($debug));
-    	
-    	$this->connection->debug = true;
-    	$build = $this->connection->query("SELECT * FROM cat");
-    	$build = $this->connection->query("INSERT INTO CAT (name, colour) VALUES (?, ?)", array('Misia', 'Striped'));
-    	
-    	$this->assertTrue(count($this->connection->getDebug()) == 2);
+	public function testUseCurrent() {
+    	$newConnection = Connection_MySQL::useCurrent($this->connection->getHandle());
+    	$this->assertTrue($newConnection->getHandle() === $this->connection->getHandle());
     }
 
 
 }
+

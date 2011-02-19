@@ -14,7 +14,7 @@ class Connection_MySQL extends Connection {
 	
 	
 	static public function useCurrent($handle) {
-		$new = new Connection_Mysql('mysql:///');
+		$new = new Connection_Mysql(new Settings());
 		$new->handle = $handle;
 		return $new;
 	}
@@ -29,9 +29,9 @@ class Connection_MySQL extends Connection {
 		$password = $this->settings->getPassword();
 		$database = $this->settings->getDatabase();
 		
-		$this->handle = mysql_connect($host, $username, $password);
+		$this->handle = @mysql_connect($host, $username, $password);
 		if (!$this->handle) {
-			throw new Exception('Can\'t open database: '.mysql_error());
+			throw new SqlException('Can\'t open database: '.mysql_error());
 		}			
 		mysql_query("USE {$database}", $this->handle);
 		mysql_query("SET character_set_client=utf8", $this->handle);
@@ -53,27 +53,30 @@ class Connection_MySQL extends Connection {
 	}
 	
 	
-	public function escape($string) {
+	public function escape($value) {
 		$this->connect();
-		return mysql_real_escape_string($string, $this->handle);
+		if (is_null($value)) {
+			return 'NULL';
+		}
+		elseif ($value == '') {
+			return "''";
+		}
+		elseif ($value{0} != '0' && (is_int($value) || is_float($value))) {
+			return (string)$value;
+		}
+		elseif (is_bool($value)) {
+			return (string)((int)$value);
+		}
+		else {
+			return str_replace('\"', '"', "'".mysql_real_escape_string($value)."'");
+		}		
 	}
 	
 	
-	public static function escapeParams($params) {
+	private function escapeParams($params) {
 		$result = array();
 		foreach ($params as $key => $value) {
-			if (is_null($value)) {
-				$result[$key] = 'NULL';
-			}
-			elseif (is_int($value) || is_float($value)) {
-				$result[$key] = (string)$value;
-			}
-			elseif (is_bool($value)) {
-				$result[$key] = (int)$value;
-			}
-			else {
-				$result[$key] = str_replace('\"', '"', "'".mysql_real_escape_string($value)."'");
-			}
+			$result[$key] = $this->escape($value);
 		}
 		return $result;
 	}
@@ -94,7 +97,7 @@ class Connection_MySQL extends Connection {
 		
 		$result = mysql_query($query, $this->handle);
 		if (mysql_errno()) {
-			throw new Exception("Query error: $query\n\n" . mysql_errno($this->handle) . ": " . mysql_error($this->handle));
+			throw new SqlException("Query error: $query\n\n" . mysql_errno($this->handle) . ": " . mysql_error($this->handle));
 		}
 		return $result;
 	}

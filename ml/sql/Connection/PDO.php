@@ -30,9 +30,23 @@ abstract class Connection_PDO extends Connection {
 	}
 	
 	
-	public function escape($string) {
+	public function escape($value) {
 		$this->connect();
-		return $this->handle->quote($string);
+		if (is_null($value)) {
+			return 'NULL';
+		}
+		elseif ($value == '') {
+			return "''";
+		}
+		elseif ($value{0} != '0' && (is_int($value) || is_float($value))) {
+			return (string)$value;
+		}
+		elseif (is_bool($value)) {
+			return (string)((int)$value);
+		}
+		else {
+			return $this->handle->quote($value);
+		}
 	}
 	
 	
