@@ -8,8 +8,8 @@ class Connection_MySQL extends Connection {
 	protected $handle = null;
 	
 	
-	public function __construct($dsn) {
-		parent::__construct($dsn);
+	public function __construct(Settings $settings) {
+		parent::__construct($settings);
 	}
 	
 	
@@ -86,7 +86,7 @@ class Connection_MySQL extends Connection {
 		$n = substr_count($query, '?');
 		$k = count($params);
 		if ($n != $k) {
-			throw new Exception("Query error: to few bind parameters; should be $n; $k given;\n$query");
+			throw new BindException("Query error: wrong number of bind parameters; should be $n; $k given;\n$query");
 		}
 		$query = str_replace(array('%', '?'), array('%%', '%s'), $query, $count);
 		$params = $this->escapeParams($params);

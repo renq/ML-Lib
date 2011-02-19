@@ -6,7 +6,6 @@ namespace ml\sql;
 /**
  * SqlConnection is an abstract class corresponds to database connection.
  * Subclasses to this class implements connection to specific database, ie. MySQL.  
- * . Podklasy odpowiadają za połączenie do konkretnej bazy.
  * @author Michał Lipek (michal@lipek.net)
  * @version 2.0 2010-01-08
  */
@@ -21,7 +20,7 @@ abstract class Connection {
 	
 	/**
 	 * Settings object generated from DSN string.
-	 * @var SqlSettings
+	 * @var Settings
 	 */
 	protected $settings;
 	
@@ -42,10 +41,8 @@ abstract class Connection {
 	 * Constructor. DNS format: driver://username:password@host/schema
 	 * @param string $dsn
 	 */
-	public function __construct($dsn) {
-		if ($dsn !== false) {
-			$this->settings = new SqlSettings($dsn);
-		}
+	public function __construct(Settings $settings) {
+		$this->settings = $settings;
 	}
 	
 	
@@ -131,7 +128,7 @@ abstract class Connection {
 		foreach ($params as &$param) {
 			$param = $this->escape($param);
 		}
-		return @vsprintf($query, $params);	
+		return vsprintf($query, $params);	
 	}
 	
 	
@@ -146,7 +143,7 @@ abstract class Connection {
 	
 	/**
 	 * Returns settings object.
-	 * @return SqlSettings
+	 * @return Settings
 	 */
 	public function getSettings() {
 		return $this->settings;

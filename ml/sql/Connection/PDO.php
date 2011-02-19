@@ -14,8 +14,8 @@ abstract class Connection_PDO extends Connection {
 	protected $handle = null;
 	
 	
-	public function __construct($dsn) {
-		parent::__construct($dsn);
+	public function __construct(Settings $settings) {
+		parent::__construct($settings);
 	}
 	
 	
@@ -39,24 +39,18 @@ abstract class Connection_PDO extends Connection {
 	public function query($query, array $params = array()) {
 		parent::query($query, $params);
 		$this->connect();
-		try {
-			$sth = $this->handle->prepare($query);
-			$sth->execute(array_values($params));
-			
+		try {			
 			$numberOfPlaceholders = substr_count($query, '?');
 			$numberOfParams = count($params);
-			if ($numberOfPlaceholders > $numberOfParams) {
-				throw new Exception("Query error: too few bind parameters; should be $numberOfPlaceholders; $numberOfParams given;\n$query");
+			if ($numberOfPlaceholders != $numberOfParams) {
+				throw new BindException("Query error: wrong number of bind parameters; should be $numberOfPlaceholders; $numberOfParams given;\n$query");
 			}
+			$sth = $this->handle->prepare($query);
+			$sth->execute(array_values($params));
 		}
-		catch (PDOException $e) {
+		catch (\PDOException $e) {
 			$query = $this->buildSql($query, $params);
-			if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
-				throw new Exception('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode(), $e); 
-			}
-			else {
-				throw new Exception('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode()); 
-			}
+			throw new SqlException('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode(), $e);
 		}
 		return $sth;
 	}
@@ -70,7 +64,7 @@ abstract class Connection_PDO extends Connection {
 	
 	public function fetch($sth) {
 		$this->connect();
-		return $sth->fetch(PDO::FETCH_ASSOC);
+		return $sth->fetch(\PDO::FETCH_ASSOC);
 	}
 	
 	

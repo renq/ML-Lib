@@ -81,24 +81,27 @@ class ErrorHandlerTest extends PHPUnit_Framework_TestCase {
 		error_reporting(-1);
     	$this->setExpectedException('ml\e2e\UnknownException');
     	ErrorHandler::handler(666, "Fake error", __FILE__, __LINE__, '');
-    }     
-   
- 
+    }
     
-    // These errors are triggered in complie time. It's no way to catch them.
-    /*
+    
     public function testThrowDeprecatedException() {
+    	error_reporting(-1);
     	ml\e2e\ErrorHandler::run();
     	$this->setExpectedException('ml\e2e\DeprecatedException');
-    	$obj =& new ArrayObject(array(1,2,3));
+    	eregi("^[a-z0-9_-]+[a-z0-9_.-]*@[a-z0-9_-]+[a-z0-9_.-]*\.[a-z]{2,5}$", 'example@example.com');
     }
-    
-    
+   
+ 
+    /**
+     * Strict errors are triggered in compile time, so we just included class
+     * with strict errors later than ErrorHandler...
+     */
     public function testThrowStrictException() {
-    	
+    	error_reporting(-1);
+    	ml\e2e\ErrorHandler::run();
+    	$this->setExpectedException('ml\e2e\StrictException');
+    	include(__DIR__ . '/strict.php');
     }
-    */
-    
 
 
 }

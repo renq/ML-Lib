@@ -33,6 +33,27 @@ class SQL {
 		$this->strategy = $strategy;
 	}
 	
+	
+	public static function createByDSN($dsn) {
+		$settings = new Settings($dsn);
+		switch ($settings->getDriver()) {
+			case 'mysql':
+				$connection = new Connection_PDO_MySQL($settings);
+				$strategy = new Strategy_Mysql($connection);
+				return new SQL($connection, $strategy);
+			case 'pgsql':
+				$connection = new Connection_PDO_PostgreSQL($settings);
+				$strategy = new Strategy_PostgreSQL($connection);
+				return new SQL($connection, $strategy);
+			case 'sqlite':
+				$connection = new Connection_PDO_Sqlite($settings);
+				$strategy = new Strategy_Sqlite($connection);
+				return new SQL($connection, $strategy);
+			default:
+				throw new Exception("Don't know what to do with DSN '$dsn'. Undefined driver '" . $settings->getDriver() . "'.");
+		}
+	}
+	
 	//--- returns data function 
 	
 	/**

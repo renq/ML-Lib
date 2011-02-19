@@ -69,14 +69,11 @@ class ErrorHandler {
 				case E_USER_WARNING:
 			        throw new UserWarningException("E_USER_WARNING: $errstr", $errno);
 			        
-				// These errors are triggered in compile time. It's no way to catch them.
-				/*
 				case E_STRICT:
 					throw new StrictException("E_STRICT: $errstr", $errno);
 				
 				case E_DEPRECATED:
 					throw new DeprecatedException("E_DEPRECATED: $errstr", $errno);
-				*/
 			
 			    default:
 			        throw new UnknownException("UNKNOWN: $errstr", $errno);
