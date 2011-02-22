@@ -105,6 +105,14 @@ abstract class Connection {
 		}
 	}
 	
+	
+	/**
+	 * Returns rows affected for last SQL operation.
+	 * @return int
+	 */
+	public abstract function getAffectedRows();
+	
+	
 	/**
 	 * Add query to query debug list. 
 	 * @param string $query

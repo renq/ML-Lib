@@ -147,6 +147,34 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     	
     	$this->assertTrue(count($this->connection->getDebug()) == 2);
     }
-
+    
+    
+    public function testGetAffectedRowsUpdate() {
+    	$this->createTable();
+		$statement = $this->connection->query("UPDATE cat SET colour = ?", array('white'));
+		$this->assertEquals(2 , $this->connection->getAffectedRows());
+    }
+    
+    
+	public function testGetAffectedRowsInsert() {
+    	$this->createTable();
+		$statement = $this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));
+		$this->assertEquals(1 , $this->connection->getAffectedRows());
+    }
+    
+    
+	public function testGetAffectedRowsDelete() {
+    	$this->createTable();
+		$statement = $this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));
+		$statement = $this->connection->query("DELETE FROM cat WHERE id = ?", array(1));
+		$this->assertEquals(1 , $this->connection->getAffectedRows());
+    }
+    
+    
+	public function testGetAffectedNoQuery() {
+		$this->setExpectedException('\ml\sql\SqlException');
+    	$this->connection->getAffectedRows();
+    }
+    
 
 }

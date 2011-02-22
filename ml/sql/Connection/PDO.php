@@ -12,6 +12,7 @@ namespace ml\sql;
 abstract class Connection_PDO extends Connection {
 	
 	protected $handle = null;
+	private $lastStatement = null;
 	
 	
 	public function __construct(Settings $settings) {
@@ -66,7 +67,18 @@ abstract class Connection_PDO extends Connection {
 			$query = $this->buildSql($query, $params);
 			throw new SqlException('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode(), $e);
 		}
+		$this->lastStatement = $sth;
 		return $sth;
+	}
+	
+	
+	public function getAffectedRows() {
+		if ($this->lastStatement instanceof \PDOStatement) {
+			return $this->lastStatement->rowCount();
+		}
+		else {
+			throw new SqlException("No query was executed, so method getRowsAffected is pointless in this moment.");
+		}
 	}
 	
 	

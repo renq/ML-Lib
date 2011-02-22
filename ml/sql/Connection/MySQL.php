@@ -5,6 +5,8 @@ namespace ml\sql;
 
 class Connection_MySQL extends Connection {
 	
+	private $lastQuery = null;
+	
 	protected $handle = null;
 	
 	
@@ -99,7 +101,16 @@ class Connection_MySQL extends Connection {
 		if (mysql_errno()) {
 			throw new SqlException("Query error: $query\n\n" . mysql_errno($this->handle) . ": " . mysql_error($this->handle));
 		}
+		$this->lastQuery = $query;
 		return $result;
+	}
+	
+	
+	public function getAffectedRows() {
+		if ($this->lastQuery == null) {
+			throw new SqlException("No query was executed, so method getRowsAffected is pointless in this moment.");
+		}
+		return mysql_affected_rows($this->handle);
 	}
 	
 	

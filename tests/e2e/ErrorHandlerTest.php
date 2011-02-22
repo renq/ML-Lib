@@ -77,6 +77,13 @@ class ErrorHandlerTest extends PHPUnit_Framework_TestCase {
     }
     
     
+	public function testRecoverableErrorException() {
+		$this->setExpectedException('ml\e2e\RecoverableErrorException');
+		$function = function(ArrayObject $a) {};
+    	$function(new stdClass());
+    }
+    
+    
 	public function testUnknownException() {
 		error_reporting(-1);
     	$this->setExpectedException('ml\e2e\UnknownException');

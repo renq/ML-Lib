@@ -74,6 +74,9 @@ class ErrorHandler {
 				
 				case E_DEPRECATED:
 					throw new DeprecatedException("E_DEPRECATED: $errstr", $errno);
+				
+				case E_RECOVERABLE_ERROR:
+					throw new RecoverableErrorException("E_RECOVERABLE_ERROR: $errstr", $errno);
 			
 			    default:
 			        throw new UnknownException("UNKNOWN: $errstr", $errno);

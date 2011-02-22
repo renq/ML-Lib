@@ -3,7 +3,7 @@
 namespace ml\sql;
 
 
-class Strategy_Mysql extends Strategy_MySQLLike {
+class Strategy_MySQL extends Strategy {
 	
 	
 	public function __construct(Connection $connection) {

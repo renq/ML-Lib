@@ -3,7 +3,13 @@
 namespace ml\sql;
 
 
-class Strategy_Sqlite extends Strategy_MySQLLike {
+class Strategy_Sqlite extends Strategy {
+	
+	
+	public function __construct(Connection $connection) {
+		parent::__construct($connection);
+		$this->escapeIdentifierCharacter = '"';
+	}
 	
 	
 	public function limit($query, $limit, $offset) {

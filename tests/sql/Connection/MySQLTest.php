@@ -144,6 +144,36 @@ class SqlConnectionMySQLTest extends PHPUnit_Framework_TestCase {
     	$newConnection = Connection_MySQL::useCurrent($this->connection->getHandle());
     	$this->assertTrue($newConnection->getHandle() === $this->connection->getHandle());
     }
+    
+    
+    public function testGetAffectedRowsUpdate() {
+    	$res = $this->connection->query("SELECT count(*) FROM cat");
+		$statement = $this->connection->query("UPDATE cat SET colour = ?", array('white'));
+		$this->assertEquals(2 , $this->connection->getAffectedRows());
+    }
+    
+    
+	public function testGetAffectedRowsInsert() {
+		$statement = $this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));
+		$this->assertEquals(1 , $this->connection->getAffectedRows());
+    }
+    
+    
+	public function testGetAffectedRowsDelete() {
+		$statement = $this->connection->query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));
+		$statement = $this->connection->query("DELETE FROM cat WHERE id = ?", array(1));
+		$this->assertEquals(1 , $this->connection->getAffectedRows());
+    }
+    
+
+    public function testGetAffectedNoQuery() {
+    	include(__DIR__ . '/../../config.php');
+		$db  = $config['mysql_db'];
+		$settings = new Settings($db);
+		$connection = new Connection_MySQL($settings);
+		$this->setExpectedException('\ml\sql\SqlException');
+    	$connection->getAffectedRows();
+    }
 
 
 }

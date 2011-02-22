@@ -133,23 +133,7 @@ class SQL {
 		}
 	}
 	
-	
-	/**
-	 * @deprecated
-	 * @see one
-	 */
-	public function getOne($query, array $params = array()) {
-		return $this->one($query, $params);
-	}
-	
-	/**
-	 * @deprecated
-	 * @see flat
-	 */
-	public function getFlatList($query, $params = array()) {
-		return $this->flat($query, $params);
-	}
-	
+		
 	//--- transakcje
 	
 	/**
@@ -186,28 +170,29 @@ class SQL {
 	 * @return int
 	 */
 	public function save($table, array $params, $id = 0, $idColumn = 'id') {
+		if (!is_string($table) || !strlen($table)) {
+			throw new \InvalidArgumentException("Table name must be a string with length greather than 1.");
+		}
 		// if array is assoc
-		if (is_array($params) && 0 !== count(array_diff_key($params, array_keys(array_keys($params))))) {
-			if (empty($params)) {
-				return false;
+		if (!is_array($params) || 0 === count(array_diff_key($params, array_keys(array_keys($params))))) {
+			throw new \InvalidArgumentException('Second parameter must be an associative array!');
+		}
+		$query = '';
+		if ($id) {
+			$query = $this->strategy->update($table, $params, $idColumn);
+			$params[] = $id;
+			$this->connection->query($query, $params);
+			if ($this->connection->getAffectedRows() > 0) {
+				return $id;
 			}
 			else {
-				$query = '';
-				if ($id) {
-					$query = $this->strategy->update($table, $params, $idColumn);
-					$params[] = $id;
-					$this->connection->query($query, $params);
-					return $id;
-				}
-				else {
-					$query = $this->strategy->insert($table, $params);
-					$this->connection->query($query, $params);
-					return $this->connection->lastInsertId();
-				}
+				throw new SqlException("No affected rows. Propably id=$id or idColumn=$idColumn is wrong.");
 			}
 		}
 		else {
-			throw new Exception('second parameter must be an associative array!');
+			$query = $this->strategy->insert($table, $params);
+			$this->connection->query($query, $params);
+			return $this->connection->lastInsertId();
 		}
 	}
 	
