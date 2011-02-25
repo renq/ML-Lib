@@ -1,0 +1,744 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coveredFile fullPath="/home/renq/Projects/www/ml_lib/ml/sql/Connection/PDO.php" shortenedPath="ml/sql/Connection/PDO.php" generated="1298673637" phpunit="3.4.13">
+  <line lineNumber="1" executed="-3">
+    <body>&lt;?php</body>
+  </line>
+  <line lineNumber="2" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="3" executed="-3">
+    <body>namespace ml\sql;</body>
+  </line>
+  <line lineNumber="4" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="5" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="6" executed="-3">
+    <body>/**</body>
+  </line>
+  <line lineNumber="7" executed="-3">
+    <body> * </body>
+  </line>
+  <line lineNumber="8" executed="-3">
+    <body> * Enter description here ...</body>
+  </line>
+  <line lineNumber="9" executed="-3">
+    <body> * @author Michał Lipek (michal@lipek.net)</body>
+  </line>
+  <line lineNumber="10" executed="-3">
+    <body> *</body>
+  </line>
+  <line lineNumber="11" executed="-3">
+    <body> */</body>
+  </line>
+  <line lineNumber="12" executed="1">
+    <body>abstract class Connection_PDO extends Connection {</body>
+    <tests>
+      <test name="testAutoload" status="0" class="SqlAutoloadTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/autoloadTest.php" shortenedPath="sql/autoloadTest.php" line="9"/>
+    </tests>
+  </line>
+  <line lineNumber="13" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="14" executed="-3">
+    <body>	protected $handle = null;</body>
+  </line>
+  <line lineNumber="15" executed="-3">
+    <body>	private $lastStatement = null;</body>
+  </line>
+  <line lineNumber="16" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="17" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="18" executed="-3">
+    <body>	public function __construct(Settings $settings) {</body>
+  </line>
+  <line lineNumber="19" executed="48">
+    <body>		parent::__construct($settings);</body>
+    <tests>
+      <test name="testConnect" status="0" class="SqlConnectionPDOPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/PostgreSQLTest.php" shortenedPath="sql/Connection/PDO/PostgreSQLTest.php" line="25"/>
+      <test name="testConnectFail" status="0" class="SqlConnectionPDOPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/PostgreSQLTest.php" shortenedPath="sql/Connection/PDO/PostgreSQLTest.php" line="31"/>
+      <test name="testPasswordHide" status="0" class="SqlConnectionPDOPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/PostgreSQLTest.php" shortenedPath="sql/Connection/PDO/PostgreSQLTest.php" line="39"/>
+      <test name="testConnect" status="0" class="SqlConnectionPDOMySQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/MySQLTest.php" shortenedPath="sql/Connection/PDO/MySQLTest.php" line="24"/>
+      <test name="testConnectFail" status="0" class="SqlConnectionPDOMySQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/MySQLTest.php" shortenedPath="sql/Connection/PDO/MySQLTest.php" line="30"/>
+      <test name="testPasswordHide" status="0" class="SqlConnectionPDOMySQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/MySQLTest.php" shortenedPath="sql/Connection/PDO/MySQLTest.php" line="38"/>
+      <test name="testConnect" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="24"/>
+      <test name="testConnectFail" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="33"/>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testBuildQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="128"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+      <test name="testGetAffectedNoQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="174"/>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testBeginTransaction" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="57"/>
+      <test name="testCommit" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="62"/>
+      <test name="testRollback" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="67"/>
+      <test name="testSaveInvalidTableName" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="85"/>
+      <test name="testSaveInvalidParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="92"/>
+      <test name="testSaveEmpryParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="99"/>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+      <test name="testDelete" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="148"/>
+      <test name="testQuery" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="159"/>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testValue" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="189"/>
+      <test name="testValueEmpty" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="199"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="20" executed="48">
+    <body>	}</body>
+    <tests>
+      <test name="testConnect" status="0" class="SqlConnectionPDOPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/PostgreSQLTest.php" shortenedPath="sql/Connection/PDO/PostgreSQLTest.php" line="25"/>
+      <test name="testConnectFail" status="0" class="SqlConnectionPDOPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/PostgreSQLTest.php" shortenedPath="sql/Connection/PDO/PostgreSQLTest.php" line="31"/>
+      <test name="testPasswordHide" status="0" class="SqlConnectionPDOPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/PostgreSQLTest.php" shortenedPath="sql/Connection/PDO/PostgreSQLTest.php" line="39"/>
+      <test name="testConnect" status="0" class="SqlConnectionPDOMySQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/MySQLTest.php" shortenedPath="sql/Connection/PDO/MySQLTest.php" line="24"/>
+      <test name="testConnectFail" status="0" class="SqlConnectionPDOMySQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/MySQLTest.php" shortenedPath="sql/Connection/PDO/MySQLTest.php" line="30"/>
+      <test name="testPasswordHide" status="0" class="SqlConnectionPDOMySQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/MySQLTest.php" shortenedPath="sql/Connection/PDO/MySQLTest.php" line="38"/>
+      <test name="testConnect" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="24"/>
+      <test name="testConnectFail" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="33"/>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testBuildQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="128"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+      <test name="testGetAffectedNoQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="174"/>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testBeginTransaction" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="57"/>
+      <test name="testCommit" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="62"/>
+      <test name="testRollback" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="67"/>
+      <test name="testSaveInvalidTableName" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="85"/>
+      <test name="testSaveInvalidParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="92"/>
+      <test name="testSaveEmpryParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="99"/>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+      <test name="testDelete" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="148"/>
+      <test name="testQuery" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="159"/>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testValue" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="189"/>
+      <test name="testValueEmpty" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="199"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="21" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="22" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="23" executed="-3">
+    <body>	public function disconnect() {</body>
+  </line>
+  <line lineNumber="24" executed="1">
+    <body>		unset($this-&gt;handle);</body>
+    <tests>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+    </tests>
+  </line>
+  <line lineNumber="25" executed="1">
+    <body>		$this-&gt;handle = null;</body>
+    <tests>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+    </tests>
+  </line>
+  <line lineNumber="26" executed="1">
+    <body>	}</body>
+    <tests>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+    </tests>
+  </line>
+  <line lineNumber="27" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="28" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="29" executed="-3">
+    <body>	public function getHandle() {</body>
+  </line>
+  <line lineNumber="30" executed="5">
+    <body>		return $this-&gt;handle;</body>
+    <tests>
+      <test name="testConnect" status="0" class="SqlConnectionPDOPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/PostgreSQLTest.php" shortenedPath="sql/Connection/PDO/PostgreSQLTest.php" line="25"/>
+      <test name="testConnect" status="0" class="SqlConnectionPDOMySQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/MySQLTest.php" shortenedPath="sql/Connection/PDO/MySQLTest.php" line="24"/>
+      <test name="testConnect" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="24"/>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+    </tests>
+  </line>
+  <line lineNumber="31" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="32" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="33" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="34" executed="-3">
+    <body>	public function escape($value) {</body>
+  </line>
+  <line lineNumber="35" executed="3">
+    <body>		$this-&gt;connect();</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+      <test name="testBuildQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="128"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+    </tests>
+  </line>
+  <line lineNumber="36" executed="3">
+    <body>		if (is_null($value)) {</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+      <test name="testBuildQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="128"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+    </tests>
+  </line>
+  <line lineNumber="37" executed="1">
+    <body>			return 'NULL';</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+    </tests>
+  </line>
+  <line lineNumber="38" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="39" executed="3">
+    <body>		elseif ($value == '') {</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+      <test name="testBuildQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="128"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+    </tests>
+  </line>
+  <line lineNumber="40" executed="1">
+    <body>			return "''";</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+    </tests>
+  </line>
+  <line lineNumber="41" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="42" executed="3">
+    <body>		elseif ($value{0} != '0' &amp;&amp; (is_int($value) || is_float($value))) {</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+      <test name="testBuildQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="128"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+    </tests>
+  </line>
+  <line lineNumber="43" executed="1">
+    <body>			return (string)$value;</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+    </tests>
+  </line>
+  <line lineNumber="44" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="45" executed="3">
+    <body>		elseif (is_bool($value)) {</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+      <test name="testBuildQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="128"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+    </tests>
+  </line>
+  <line lineNumber="46" executed="1">
+    <body>			return (string)((int)$value);</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+    </tests>
+  </line>
+  <line lineNumber="47" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="48" executed="-3">
+    <body>		else {</body>
+  </line>
+  <line lineNumber="49" executed="3">
+    <body>			return $this-&gt;handle-&gt;quote($value);</body>
+    <tests>
+      <test name="testEscape" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="69"/>
+      <test name="testBuildQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="128"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+    </tests>
+  </line>
+  <line lineNumber="50" executed="-3">
+    <body>		}</body>
+  </line>
+  <line lineNumber="51" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="52" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="53" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="54" executed="-3">
+    <body>	public function query($query, array $params = array()) {</body>
+  </line>
+  <line lineNumber="55" executed="14">
+    <body>		parent::query($query, $params);</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="56" executed="14">
+    <body>		$this-&gt;connect();</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="57" executed="-3">
+    <body>		try {			</body>
+  </line>
+  <line lineNumber="58" executed="14">
+    <body>			$numberOfPlaceholders = substr_count($query, '?');</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="59" executed="14">
+    <body>			$numberOfParams = count($params);</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="60" executed="14">
+    <body>			if ($numberOfPlaceholders != $numberOfParams) {</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="61" executed="2">
+    <body>				throw new BindException("Query error: wrong number of bind parameters; should be $numberOfPlaceholders; $numberOfParams given;\n$query");</body>
+    <tests>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+    </tests>
+  </line>
+  <line lineNumber="62" executed="-2">
+    <body>			}</body>
+  </line>
+  <line lineNumber="63" executed="14">
+    <body>			$sth = $this-&gt;handle-&gt;prepare($query);</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="64" executed="13">
+    <body>			$sth-&gt;execute(array_values($params));</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="65" executed="-3">
+    <body>		}</body>
+  </line>
+  <line lineNumber="66" executed="14">
+    <body>		catch (\PDOException $e) {</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="67" executed="1">
+    <body>			$query = $this-&gt;buildSql($query, $params);</body>
+    <tests>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+    </tests>
+  </line>
+  <line lineNumber="68" executed="1">
+    <body>			throw new SqlException('Query error: '.$e-&gt;getMessage().";\n$query", (int)$e-&gt;getCode(), $e);</body>
+    <tests>
+      <test name="testQuerySqlFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="79"/>
+    </tests>
+  </line>
+  <line lineNumber="69" executed="-3">
+    <body>		}</body>
+  </line>
+  <line lineNumber="70" executed="13">
+    <body>		$this-&gt;lastStatement = $sth;</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="71" executed="13">
+    <body>		return $sth;</body>
+    <tests>
+      <test name="testConnectionLazyLoad" status="0" class="SqlConnectionPDOSqliteTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDO/SqliteTest.php" shortenedPath="sql/Connection/PDO/SqliteTest.php" line="42"/>
+      <test name="testDisconnect" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="36"/>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testQueryTooFewBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="55"/>
+      <test name="testQueryTooMuchBindFail" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="62"/>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+      <test name="testDebug" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="137"/>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="72" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="73" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="74" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="75" executed="-3">
+    <body>	public function getAffectedRows() {</body>
+  </line>
+  <line lineNumber="76" executed="4">
+    <body>		if ($this-&gt;lastStatement instanceof \PDOStatement) {</body>
+    <tests>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+      <test name="testGetAffectedNoQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="174"/>
+    </tests>
+  </line>
+  <line lineNumber="77" executed="3">
+    <body>			return $this-&gt;lastStatement-&gt;rowCount();</body>
+    <tests>
+      <test name="testGetAffectedRowsUpdate" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="152"/>
+      <test name="testGetAffectedRowsInsert" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="159"/>
+      <test name="testGetAffectedRowsDelete" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="166"/>
+    </tests>
+  </line>
+  <line lineNumber="78" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="79" executed="-3">
+    <body>		else {</body>
+  </line>
+  <line lineNumber="80" executed="1">
+    <body>			throw new SqlException("No query was executed, so method getRowsAffected is pointless in this moment.");</body>
+    <tests>
+      <test name="testGetAffectedNoQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="174"/>
+    </tests>
+  </line>
+  <line lineNumber="81" executed="-3">
+    <body>		}</body>
+  </line>
+  <line lineNumber="82" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="83" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="84" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="85" executed="-3">
+    <body>	public function lastInsertId($table = '') {</body>
+  </line>
+  <line lineNumber="86" executed="1">
+    <body>		$this-&gt;connect();</body>
+    <tests>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+    </tests>
+  </line>
+  <line lineNumber="87" executed="1">
+    <body>		return $this-&gt;handle-&gt;lastInsertId();</body>
+    <tests>
+      <test name="testLastInsertId" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="85"/>
+    </tests>
+  </line>
+  <line lineNumber="88" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="89" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="90" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="91" executed="-3">
+    <body>	public function fetch($sth) {</body>
+  </line>
+  <line lineNumber="92" executed="4">
+    <body>		$this-&gt;connect();</body>
+    <tests>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+    </tests>
+  </line>
+  <line lineNumber="93" executed="4">
+    <body>		return $sth-&gt;fetch(\PDO::FETCH_ASSOC);</body>
+    <tests>
+      <test name="testQuery" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="45"/>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+      <test name="testFetchEOF" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="119"/>
+    </tests>
+  </line>
+  <line lineNumber="94" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="95" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="96" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="97" executed="-3">
+    <body>	public function beginTransaction() {</body>
+  </line>
+  <line lineNumber="98" executed="2">
+    <body>		$this-&gt;connect();</body>
+    <tests>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+    </tests>
+  </line>
+  <line lineNumber="99" executed="2">
+    <body>		$this-&gt;handle-&gt;beginTransaction();</body>
+    <tests>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+    </tests>
+  </line>
+  <line lineNumber="100" executed="2">
+    <body>	}</body>
+    <tests>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+    </tests>
+  </line>
+  <line lineNumber="101" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="102" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="103" executed="-3">
+    <body>	public function commit() {</body>
+  </line>
+  <line lineNumber="104" executed="1">
+    <body>		$this-&gt;connect();</body>
+    <tests>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+    </tests>
+  </line>
+  <line lineNumber="105" executed="1">
+    <body>		$this-&gt;handle-&gt;commit();</body>
+    <tests>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+    </tests>
+  </line>
+  <line lineNumber="106" executed="1">
+    <body>	}</body>
+    <tests>
+      <test name="testTransactionCommit" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="107"/>
+    </tests>
+  </line>
+  <line lineNumber="107" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="108" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="109" executed="-3">
+    <body>	public function rollback() {</body>
+  </line>
+  <line lineNumber="110" executed="1">
+    <body>		$this-&gt;connect();</body>
+    <tests>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+    </tests>
+  </line>
+  <line lineNumber="111" executed="1">
+    <body>		$this-&gt;handle-&gt;rollback();</body>
+    <tests>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+    </tests>
+  </line>
+  <line lineNumber="112" executed="1">
+    <body>	}</body>
+    <tests>
+      <test name="testTransactionRollback" status="0" class="SqlConnectionPDOTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" line="95"/>
+    </tests>
+  </line>
+  <line lineNumber="113" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="114" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="115" executed="-3">
+    <body>} </body>
+  </line>
+  <line lineNumber="116" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="117" executed="-3">
+    <body></body>
+  </line>
+</coveredFile>

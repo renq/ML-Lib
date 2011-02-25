@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFile fullPath="/home/renq/Projects/www/ml_lib/tests//sql/Strategy/SqliteTest.php" shortenedPath="sql/Strategy/SqliteTest.php" generated="1298673637" phpunit="3.4.13">
+  <line lineNumber="1">
+    <body>&lt;?php</body>
+  </line>
+  <line lineNumber="2">
+    <body></body>
+  </line>
+  <line lineNumber="3">
+    <body></body>
+  </line>
+  <line lineNumber="4">
+    <body>use ml\sql\Settings;</body>
+  </line>
+  <line lineNumber="5">
+    <body>use ml\sql\Strategy_MySQL;</body>
+  </line>
+  <line lineNumber="6">
+    <body></body>
+  </line>
+  <line lineNumber="7">
+    <body>require_once dirname(__FILE__) . '../../../../ml/ml.php';</body>
+  </line>
+  <line lineNumber="8">
+    <body></body>
+  </line>
+  <line lineNumber="9">
+    <body></body>
+  </line>
+  <line lineNumber="10">
+    <body>class SqlStrategyMySQLTest extends PHPUnit_Framework_TestCase {</body>
+  </line>
+  <line lineNumber="11">
+    <body></body>
+  </line>
+  <line lineNumber="12">
+    <body>	</body>
+  </line>
+  <line lineNumber="13">
+    <body>	public function testLimit() {</body>
+  </line>
+  <line lineNumber="14">
+    <body>		$settings = $this-&gt;getMock('ml\sql\Settings');</body>
+  </line>
+  <line lineNumber="15">
+    <body>    	$connection = $this-&gt;getMock('ml\sql\Connection', array(), array($settings));</body>
+  </line>
+  <line lineNumber="16">
+    <body>    	$strategy = new Strategy_MySQL($connection);</body>
+  </line>
+  <line lineNumber="17">
+    <body>    	$query = "SELECT * FROM dual";</body>
+  </line>
+  <line lineNumber="18">
+    <body>    	$queryWithLimit = $strategy-&gt;limit($query, 20, 100);</body>
+  </line>
+  <line lineNumber="19">
+    <body>    	$queryWithLimit = preg_replace('/[\s]+/', ' ', $queryWithLimit);</body>
+  </line>
+  <line lineNumber="20">
+    <body>    	</body>
+  </line>
+  <line lineNumber="21">
+    <body>    	$this-&gt;assertEquals("$query LIMIT 100, 20", $queryWithLimit);</body>
+  </line>
+  <line lineNumber="22">
+    <body>    }</body>
+  </line>
+  <line lineNumber="23">
+    <body></body>
+  </line>
+  <line lineNumber="24">
+    <body></body>
+  </line>
+  <line lineNumber="25">
+    <body>}</body>
+  </line>
+  <line lineNumber="26">
+    <body></body>
+  </line>
+</testFile>

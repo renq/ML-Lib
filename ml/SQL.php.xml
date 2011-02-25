@@ -1,0 +1,1255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coveredFile fullPath="/home/renq/Projects/www/ml_lib/ml/sql/SQL.php" shortenedPath="ml/sql/SQL.php" generated="1298673637" phpunit="3.4.13">
+  <line lineNumber="1" executed="-3">
+    <body>&lt;?php</body>
+  </line>
+  <line lineNumber="2" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="3" executed="-3">
+    <body>namespace ml\sql;</body>
+  </line>
+  <line lineNumber="4" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="5" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="6" executed="-3">
+    <body>/**</body>
+  </line>
+  <line lineNumber="7" executed="-3">
+    <body> *  class.</body>
+  </line>
+  <line lineNumber="8" executed="-3">
+    <body> * @author Michał Lipek (michal@lipek.net)</body>
+  </line>
+  <line lineNumber="9" executed="-3">
+    <body> * @version 2.0 2010-11-31</body>
+  </line>
+  <line lineNumber="10" executed="-3">
+    <body> */</body>
+  </line>
+  <line lineNumber="11" executed="1">
+    <body>class SQL {</body>
+    <tests>
+      <test name="testAutoload" status="0" class="SqlAutoloadTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/autoloadTest.php" shortenedPath="sql/autoloadTest.php" line="9"/>
+    </tests>
+  </line>
+  <line lineNumber="12" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="13" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="14" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="15" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="16" executed="-3">
+    <body>	 * @var Connection</body>
+  </line>
+  <line lineNumber="17" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="18" executed="-3">
+    <body>	protected $connection;</body>
+  </line>
+  <line lineNumber="19" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="20" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="21" executed="-3">
+    <body>	 * @var SqlStrategy</body>
+  </line>
+  <line lineNumber="22" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="23" executed="-3">
+    <body>	protected $strategy;</body>
+  </line>
+  <line lineNumber="24" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="25" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="26" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="27" executed="-3">
+    <body>	 * The constructor.</body>
+  </line>
+  <line lineNumber="28" executed="-3">
+    <body>	 * @param Connection $connection</body>
+  </line>
+  <line lineNumber="29" executed="-3">
+    <body>	 * @param Strategy $strategy</body>
+  </line>
+  <line lineNumber="30" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="31" executed="-3">
+    <body>	public function __construct(Connection $connection, Strategy $strategy) {</body>
+  </line>
+  <line lineNumber="32" executed="23">
+    <body>		$this-&gt;connection = $connection;</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testBeginTransaction" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="57"/>
+      <test name="testCommit" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="62"/>
+      <test name="testRollback" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="67"/>
+      <test name="testSaveInvalidTableName" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="85"/>
+      <test name="testSaveInvalidParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="92"/>
+      <test name="testSaveEmpryParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="99"/>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+      <test name="testDelete" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="148"/>
+      <test name="testQuery" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="159"/>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testValue" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="189"/>
+      <test name="testValueEmpty" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="199"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="33" executed="23">
+    <body>		$this-&gt;strategy = $strategy;</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testBeginTransaction" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="57"/>
+      <test name="testCommit" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="62"/>
+      <test name="testRollback" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="67"/>
+      <test name="testSaveInvalidTableName" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="85"/>
+      <test name="testSaveInvalidParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="92"/>
+      <test name="testSaveEmpryParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="99"/>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+      <test name="testDelete" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="148"/>
+      <test name="testQuery" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="159"/>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testValue" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="189"/>
+      <test name="testValueEmpty" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="199"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="34" executed="23">
+    <body>	}</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testBeginTransaction" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="57"/>
+      <test name="testCommit" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="62"/>
+      <test name="testRollback" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="67"/>
+      <test name="testSaveInvalidTableName" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="85"/>
+      <test name="testSaveInvalidParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="92"/>
+      <test name="testSaveEmpryParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="99"/>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+      <test name="testDelete" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="148"/>
+      <test name="testQuery" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="159"/>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testValue" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="189"/>
+      <test name="testValueEmpty" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="199"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="35" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="36" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="37" executed="-3">
+    <body>	public static function createByDSN($dsn) {</body>
+  </line>
+  <line lineNumber="38" executed="4">
+    <body>		$settings = new Settings($dsn);</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testCreateByDSNUnknownDatabase" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="39"/>
+    </tests>
+  </line>
+  <line lineNumber="39" executed="4">
+    <body>		switch ($settings-&gt;getDriver()) {</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testCreateByDSNUnknownDatabase" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="39"/>
+    </tests>
+  </line>
+  <line lineNumber="40" executed="4">
+    <body>			case 'mysql':</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testCreateByDSNUnknownDatabase" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="39"/>
+    </tests>
+  </line>
+  <line lineNumber="41" executed="1">
+    <body>				$connection = new Connection_PDO_MySQL($settings);</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+    </tests>
+  </line>
+  <line lineNumber="42" executed="1">
+    <body>				$strategy = new Strategy_MySQL($connection);</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+    </tests>
+  </line>
+  <line lineNumber="43" executed="1">
+    <body>				return new SQL($connection, $strategy);</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+    </tests>
+  </line>
+  <line lineNumber="44" executed="3">
+    <body>			case 'pgsql':</body>
+    <tests>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testCreateByDSNUnknownDatabase" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="39"/>
+    </tests>
+  </line>
+  <line lineNumber="45" executed="1">
+    <body>				$connection = new Connection_PDO_PostgreSQL($settings);</body>
+    <tests>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+    </tests>
+  </line>
+  <line lineNumber="46" executed="1">
+    <body>				$strategy = new Strategy_PostgreSQL($connection);</body>
+    <tests>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+    </tests>
+  </line>
+  <line lineNumber="47" executed="1">
+    <body>				return new SQL($connection, $strategy);</body>
+    <tests>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+    </tests>
+  </line>
+  <line lineNumber="48" executed="2">
+    <body>			case 'sqlite':</body>
+    <tests>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testCreateByDSNUnknownDatabase" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="39"/>
+    </tests>
+  </line>
+  <line lineNumber="49" executed="1">
+    <body>				$connection = new Connection_PDO_Sqlite($settings);</body>
+    <tests>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+    </tests>
+  </line>
+  <line lineNumber="50" executed="1">
+    <body>				$strategy = new Strategy_Sqlite($connection);</body>
+    <tests>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+    </tests>
+  </line>
+  <line lineNumber="51" executed="1">
+    <body>				return new SQL($connection, $strategy);</body>
+    <tests>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+    </tests>
+  </line>
+  <line lineNumber="52" executed="1">
+    <body>			default:</body>
+    <tests>
+      <test name="testCreateByDSNUnknownDatabase" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="39"/>
+    </tests>
+  </line>
+  <line lineNumber="53" executed="1">
+    <body>				throw new Exception("Don't know what to do with DSN '$dsn'. Undefined driver '" . $settings-&gt;getDriver() . "'.");</body>
+    <tests>
+      <test name="testCreateByDSNUnknownDatabase" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="39"/>
+    </tests>
+  </line>
+  <line lineNumber="54" executed="1">
+    <body>		}</body>
+    <tests>
+      <test name="testCreateByDSNUnknownDatabase" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="39"/>
+    </tests>
+  </line>
+  <line lineNumber="55" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="56" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="57" executed="-3">
+    <body>	//--- returns data function </body>
+  </line>
+  <line lineNumber="58" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="59" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="60" executed="-3">
+    <body>	 * Returns rows from database.</body>
+  </line>
+  <line lineNumber="61" executed="-3">
+    <body>	 * @param string $query</body>
+  </line>
+  <line lineNumber="62" executed="-3">
+    <body>	 * @param array $params</body>
+  </line>
+  <line lineNumber="63" executed="-3">
+    <body>	 * @param int $limit</body>
+  </line>
+  <line lineNumber="64" executed="-3">
+    <body>	 * @param int $offset</body>
+  </line>
+  <line lineNumber="65" executed="-3">
+    <body>	 * @return array</body>
+  </line>
+  <line lineNumber="66" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="67" executed="-3">
+    <body>	public function get($query, array $params = array(), $limit = false, $offset = 0) {</body>
+  </line>
+  <line lineNumber="68" executed="4">
+    <body>		if ($limit) {</body>
+    <tests>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+    </tests>
+  </line>
+  <line lineNumber="69" executed="1">
+    <body>			$query = $this-&gt;strategy-&gt;limit($query, $limit, $offset);</body>
+    <tests>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+    </tests>
+  </line>
+  <line lineNumber="70" executed="1">
+    <body>		}</body>
+    <tests>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+    </tests>
+  </line>
+  <line lineNumber="71" executed="4">
+    <body>		$return = array();</body>
+    <tests>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+    </tests>
+  </line>
+  <line lineNumber="72" executed="4">
+    <body>		$result = $this-&gt;connection-&gt;query($query, $params);</body>
+    <tests>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+    </tests>
+  </line>
+  <line lineNumber="73" executed="4">
+    <body>		if ($result) {</body>
+    <tests>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+    </tests>
+  </line>
+  <line lineNumber="74" executed="1">
+    <body>			while ($row = $this-&gt;connection-&gt;fetch($result)) {</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="75" executed="1">
+    <body>				$return[] = $row;</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="76" executed="1">
+    <body>			}</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="77" executed="1">
+    <body>		}</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="78" executed="4">
+    <body>		return $return;</body>
+    <tests>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+      <test name="testGet" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="229"/>
+    </tests>
+  </line>
+  <line lineNumber="79" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="80" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="81" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="82" executed="-3">
+    <body>	 * Return one row.</body>
+  </line>
+  <line lineNumber="83" executed="-3">
+    <body>	 * @param string $query</body>
+  </line>
+  <line lineNumber="84" executed="-3">
+    <body>	 * @param array $params</body>
+  </line>
+  <line lineNumber="85" executed="-3">
+    <body>	 * @return array</body>
+  </line>
+  <line lineNumber="86" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="87" executed="-3">
+    <body>	public function one($query, array $params = array()) {</body>
+  </line>
+  <line lineNumber="88" executed="2">
+    <body>		$tmp = $this-&gt;get($this-&gt;strategy-&gt;one($query), $params);</body>
+    <tests>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+    </tests>
+  </line>
+  <line lineNumber="89" executed="2">
+    <body>		return empty($tmp)?false:$tmp[0];</body>
+    <tests>
+      <test name="testOne" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="169"/>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+    </tests>
+  </line>
+  <line lineNumber="90" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="91" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="92" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="93" executed="-3">
+    <body>	 * Return array of values from one (first) column.</body>
+  </line>
+  <line lineNumber="94" executed="-3">
+    <body>	 * @param string $query</body>
+  </line>
+  <line lineNumber="95" executed="-3">
+    <body>	 * @param array $params</body>
+  </line>
+  <line lineNumber="96" executed="-3">
+    <body>	 * @param int $limit</body>
+  </line>
+  <line lineNumber="97" executed="-3">
+    <body>	 * @param int $offset</body>
+  </line>
+  <line lineNumber="98" executed="-3">
+    <body>	 * @return array</body>
+  </line>
+  <line lineNumber="99" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="100" executed="-3">
+    <body>	public function flat($query, array $params = array(), $limit = false, $offset = 0) {</body>
+  </line>
+  <line lineNumber="101" executed="1">
+    <body>		$result = $this-&gt;get($query, $params, $limit, $offset);</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="102" executed="1">
+    <body>		foreach ($result as &amp;$row) {</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="103" executed="1">
+    <body>			$row = array_shift($row);</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="104" executed="1">
+    <body>		}</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="105" executed="1">
+    <body>		return $result;</body>
+    <tests>
+      <test name="testFlat" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="211"/>
+    </tests>
+  </line>
+  <line lineNumber="106" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="107" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="108" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="109" executed="-3">
+    <body>	 * Returns row by id.</body>
+  </line>
+  <line lineNumber="110" executed="-3">
+    <body>	 * @param string $table</body>
+  </line>
+  <line lineNumber="111" executed="-3">
+    <body>	 * @param int $id</body>
+  </line>
+  <line lineNumber="112" executed="-3">
+    <body>	 * @param string $idColumn</body>
+  </line>
+  <line lineNumber="113" executed="-3">
+    <body>	 * @return array</body>
+  </line>
+  <line lineNumber="114" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="115" executed="-3">
+    <body>	public function byId($table, $id, $idColumn = 'id') {</body>
+  </line>
+  <line lineNumber="116" executed="1">
+    <body>		$query = $this-&gt;strategy-&gt;byId($table, $idColumn);</body>
+    <tests>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+    </tests>
+  </line>
+  <line lineNumber="117" executed="1">
+    <body>		return $this-&gt;one($query, array($id));</body>
+    <tests>
+      <test name="testById" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="179"/>
+    </tests>
+  </line>
+  <line lineNumber="118" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="119" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="120" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="121" executed="-3">
+    <body>	 * Returns value in first column and first row.</body>
+  </line>
+  <line lineNumber="122" executed="-3">
+    <body>	 * @param string $query</body>
+  </line>
+  <line lineNumber="123" executed="-3">
+    <body>	 * @param array $params</body>
+  </line>
+  <line lineNumber="124" executed="-3">
+    <body>	 * @return string</body>
+  </line>
+  <line lineNumber="125" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="126" executed="-3">
+    <body>	public function value($query, array $params = array()) {</body>
+  </line>
+  <line lineNumber="127" executed="2">
+    <body>		$tmp = $this-&gt;one($query, $params);</body>
+    <tests>
+      <test name="testValue" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="189"/>
+      <test name="testValueEmpty" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="199"/>
+    </tests>
+  </line>
+  <line lineNumber="128" executed="2">
+    <body>		if (!empty($tmp) &amp;&amp; is_array($tmp)) {</body>
+    <tests>
+      <test name="testValue" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="189"/>
+      <test name="testValueEmpty" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="199"/>
+    </tests>
+  </line>
+  <line lineNumber="129" executed="1">
+    <body>			return array_shift($tmp);</body>
+    <tests>
+      <test name="testValue" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="189"/>
+    </tests>
+  </line>
+  <line lineNumber="130" executed="-2">
+    <body>		} </body>
+  </line>
+  <line lineNumber="131" executed="-3">
+    <body>		else {</body>
+  </line>
+  <line lineNumber="132" executed="1">
+    <body>			return false;</body>
+    <tests>
+      <test name="testValueEmpty" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="199"/>
+    </tests>
+  </line>
+  <line lineNumber="133" executed="-3">
+    <body>		}</body>
+  </line>
+  <line lineNumber="134" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="135" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="136" executed="-3">
+    <body>		</body>
+  </line>
+  <line lineNumber="137" executed="-3">
+    <body>	//--- transakcje</body>
+  </line>
+  <line lineNumber="138" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="139" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="140" executed="-3">
+    <body>	 * Begin transaction.</body>
+  </line>
+  <line lineNumber="141" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="142" executed="-3">
+    <body>	public function beginTransaction() {</body>
+  </line>
+  <line lineNumber="143" executed="1">
+    <body>		$this-&gt;connection-&gt;beginTransaction();</body>
+    <tests>
+      <test name="testBeginTransaction" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="57"/>
+    </tests>
+  </line>
+  <line lineNumber="144" executed="1">
+    <body>	}</body>
+    <tests>
+      <test name="testBeginTransaction" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="57"/>
+    </tests>
+  </line>
+  <line lineNumber="145" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="146" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="147" executed="-3">
+    <body>	 * Commit transaction.</body>
+  </line>
+  <line lineNumber="148" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="149" executed="-3">
+    <body>	public function commit() {</body>
+  </line>
+  <line lineNumber="150" executed="1">
+    <body>		$this-&gt;connection-&gt;commit();</body>
+    <tests>
+      <test name="testCommit" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="62"/>
+    </tests>
+  </line>
+  <line lineNumber="151" executed="1">
+    <body>	}</body>
+    <tests>
+      <test name="testCommit" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="62"/>
+    </tests>
+  </line>
+  <line lineNumber="152" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="153" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="154" executed="-3">
+    <body>	 * Rollback transaction.</body>
+  </line>
+  <line lineNumber="155" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="156" executed="-3">
+    <body>	public function rollback() {</body>
+  </line>
+  <line lineNumber="157" executed="1">
+    <body>		$this-&gt;connection-&gt;rollback();</body>
+    <tests>
+      <test name="testRollback" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="67"/>
+    </tests>
+  </line>
+  <line lineNumber="158" executed="1">
+    <body>	}</body>
+    <tests>
+      <test name="testRollback" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="67"/>
+    </tests>
+  </line>
+  <line lineNumber="159" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="160" executed="-3">
+    <body>	//--- modify</body>
+  </line>
+  <line lineNumber="161" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="162" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="163" executed="-3">
+    <body>	 * Save row to table "$table". $params is a map of values. Key is a table field name. Value is a value.</body>
+  </line>
+  <line lineNumber="164" executed="-3">
+    <body>	 * When id = 0 row is inserted. When id &lt;&gt; 0 then row is updated.</body>
+  </line>
+  <line lineNumber="165" executed="-3">
+    <body>	 * Primary key should'n be inside $params array.</body>
+  </line>
+  <line lineNumber="166" executed="-3">
+    <body>	 * @param $table</body>
+  </line>
+  <line lineNumber="167" executed="-3">
+    <body>	 * @param array $params</body>
+  </line>
+  <line lineNumber="168" executed="-3">
+    <body>	 * @param int $id</body>
+  </line>
+  <line lineNumber="169" executed="-3">
+    <body>	 * @param string $idColumn</body>
+  </line>
+  <line lineNumber="170" executed="-3">
+    <body>	 * @return int</body>
+  </line>
+  <line lineNumber="171" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="172" executed="-3">
+    <body>	public function save($table, array $params, $id = 0, $idColumn = 'id') {</body>
+  </line>
+  <line lineNumber="173" executed="6">
+    <body>		if (!is_string($table) || !strlen($table)) {</body>
+    <tests>
+      <test name="testSaveInvalidTableName" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="85"/>
+      <test name="testSaveInvalidParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="92"/>
+      <test name="testSaveEmpryParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="99"/>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="174" executed="1">
+    <body>			throw new \InvalidArgumentException("Table name must be a string with length greather than 1.");</body>
+    <tests>
+      <test name="testSaveInvalidTableName" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="85"/>
+    </tests>
+  </line>
+  <line lineNumber="175" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="176" executed="-3">
+    <body>		// if array is assoc</body>
+  </line>
+  <line lineNumber="177" executed="5">
+    <body>		if (!is_array($params) || 0 === count(array_diff_key($params, array_keys(array_keys($params))))) {</body>
+    <tests>
+      <test name="testSaveInvalidParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="92"/>
+      <test name="testSaveEmpryParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="99"/>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="178" executed="2">
+    <body>			throw new \InvalidArgumentException('Second parameter must be an associative array!');</body>
+    <tests>
+      <test name="testSaveInvalidParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="92"/>
+      <test name="testSaveEmpryParams" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="99"/>
+    </tests>
+  </line>
+  <line lineNumber="179" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="180" executed="3">
+    <body>		$query = '';</body>
+    <tests>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="181" executed="3">
+    <body>		if ($id) {</body>
+    <tests>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="182" executed="2">
+    <body>			$query = $this-&gt;strategy-&gt;update($table, $params, $idColumn);</body>
+    <tests>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="183" executed="2">
+    <body>			$params[] = $id;</body>
+    <tests>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="184" executed="2">
+    <body>			$this-&gt;connection-&gt;query($query, $params);</body>
+    <tests>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="185" executed="2">
+    <body>			if ($this-&gt;connection-&gt;getAffectedRows() &gt; 0) {</body>
+    <tests>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="186" executed="1">
+    <body>				return $id;</body>
+    <tests>
+      <test name="testSaveUpdate" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="120"/>
+    </tests>
+  </line>
+  <line lineNumber="187" executed="-2">
+    <body>			}</body>
+  </line>
+  <line lineNumber="188" executed="-3">
+    <body>			else {</body>
+  </line>
+  <line lineNumber="189" executed="1">
+    <body>				throw new SqlException("No affected rows. Propably id=$id or idColumn=$idColumn is wrong.");</body>
+    <tests>
+      <test name="testSaveUpdateWithWrongID" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="134"/>
+    </tests>
+  </line>
+  <line lineNumber="190" executed="-3">
+    <body>			}</body>
+  </line>
+  <line lineNumber="191" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="192" executed="-3">
+    <body>		else {</body>
+  </line>
+  <line lineNumber="193" executed="1">
+    <body>			$query = $this-&gt;strategy-&gt;insert($table, $params);</body>
+    <tests>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+    </tests>
+  </line>
+  <line lineNumber="194" executed="1">
+    <body>			$this-&gt;connection-&gt;query($query, $params);</body>
+    <tests>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+    </tests>
+  </line>
+  <line lineNumber="195" executed="1">
+    <body>			return $this-&gt;connection-&gt;lastInsertId();</body>
+    <tests>
+      <test name="testSaveInsert" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="106"/>
+    </tests>
+  </line>
+  <line lineNumber="196" executed="-3">
+    <body>		}</body>
+  </line>
+  <line lineNumber="197" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="198" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="199" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="200" executed="-3">
+    <body>	public function saveFromRequest($table, $extraParams = array(), $idColumn = 'id') {</body>
+  </line>
+  <line lineNumber="201" executed="1">
+    <body>		$params = array();</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="202" executed="1">
+    <body>		foreach (array_intersect(array_keys($this-&gt;describe($table)), array_keys($_REQUEST)) as $key) {</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="203" executed="1">
+    <body>			$params[$key] = $_REQUEST[$key];</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="204" executed="1">
+    <body>		}</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="205" executed="-3">
+    <body>		</body>
+  </line>
+  <line lineNumber="206" executed="1">
+    <body>		$id = 0;</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="207" executed="1">
+    <body>		if (isset($params[$idColumn])) {</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="208" executed="1">
+    <body>			$id = $params[$idColumn];</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="209" executed="1">
+    <body>		}</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="210" executed="1">
+    <body>		$params = array_merge($params, $extraParams);</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="211" executed="1">
+    <body>		return $this-&gt;save($table, $params, $id);</body>
+    <tests>
+      <test name="testSaveFromRequest" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="279"/>
+    </tests>
+  </line>
+  <line lineNumber="212" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="213" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="214" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="215" executed="-3">
+    <body>	 * Delete row(s) from table by id. </body>
+  </line>
+  <line lineNumber="216" executed="-3">
+    <body>	 * @param string $table</body>
+  </line>
+  <line lineNumber="217" executed="-3">
+    <body>	 * @param int $id</body>
+  </line>
+  <line lineNumber="218" executed="-3">
+    <body>	 * @param string $idColumn</body>
+  </line>
+  <line lineNumber="219" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="220" executed="-3">
+    <body>	public function delete($table, $id, $idColumn = 'id') {</body>
+  </line>
+  <line lineNumber="221" executed="1">
+    <body>		$query = $this-&gt;strategy-&gt;delete($table, $idColumn);</body>
+    <tests>
+      <test name="testDelete" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="148"/>
+    </tests>
+  </line>
+  <line lineNumber="222" executed="1">
+    <body>		$this-&gt;connection-&gt;query($query, array($id));</body>
+    <tests>
+      <test name="testDelete" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="148"/>
+    </tests>
+  </line>
+  <line lineNumber="223" executed="1">
+    <body>	}</body>
+    <tests>
+      <test name="testDelete" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="148"/>
+    </tests>
+  </line>
+  <line lineNumber="224" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="225" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="226" executed="-3">
+    <body>	//--- other</body>
+  </line>
+  <line lineNumber="227" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="228" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="229" executed="-3">
+    <body>	 * Execute query. </body>
+  </line>
+  <line lineNumber="230" executed="-3">
+    <body>	 * @param string $query</body>
+  </line>
+  <line lineNumber="231" executed="-3">
+    <body>	 * @param array $params</body>
+  </line>
+  <line lineNumber="232" executed="-3">
+    <body>	 * @return mixed</body>
+  </line>
+  <line lineNumber="233" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="234" executed="-3">
+    <body>	public function query($query, array $params = array()) {</body>
+  </line>
+  <line lineNumber="235" executed="1">
+    <body>		return $this-&gt;connection-&gt;query($query, $params);</body>
+    <tests>
+      <test name="testQuery" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="159"/>
+    </tests>
+  </line>
+  <line lineNumber="236" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="237" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="238" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="239" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="240" executed="-3">
+    <body>	 * Returns describe table information.</body>
+  </line>
+  <line lineNumber="241" executed="-3">
+    <body>	 * @TODO</body>
+  </line>
+  <line lineNumber="242" executed="-3">
+    <body>	 * @param string $table</body>
+  </line>
+  <line lineNumber="243" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="244" executed="-3">
+    <body>	public function describe($table) {</body>
+  </line>
+  <line lineNumber="245" executed="2">
+    <body>		$return = array();</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+    </tests>
+  </line>
+  <line lineNumber="246" executed="2">
+    <body>		$tmp = $this-&gt;get($this-&gt;strategy-&gt;describe(), array($this-&gt;getConnection()-&gt;getSettings()-&gt;getDatabase(), $table));</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+    </tests>
+  </line>
+  <line lineNumber="247" executed="2">
+    <body>		if ($tmp) {</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+    </tests>
+  </line>
+  <line lineNumber="248" executed="1">
+    <body>			$result = array();</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="249" executed="1">
+    <body>			foreach ($tmp as $item) {</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="250" executed="1">
+    <body>				$newItem = array();</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="251" executed="1">
+    <body>				foreach ($item as $k =&gt; $v) {</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="252" executed="1">
+    <body>					$newItem[strtolower($k)] = $v;</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="253" executed="1">
+    <body>				}</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="254" executed="1">
+    <body>				$item = $newItem;</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="255" executed="1">
+    <body>				$result[$item['column_name']] = $newItem;</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="256" executed="1">
+    <body>			}</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="257" executed="1">
+    <body>			return $result;</body>
+    <tests>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+    </tests>
+  </line>
+  <line lineNumber="258" executed="-2">
+    <body>		}</body>
+  </line>
+  <line lineNumber="259" executed="1">
+    <body>		throw new SqlException("Desribe fail. Probably table '$table' doesn't exists.");</body>
+    <tests>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+    </tests>
+  </line>
+  <line lineNumber="260" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="261" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="262" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="263" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="264" executed="-3">
+    <body>	 * Returns connection object.</body>
+  </line>
+  <line lineNumber="265" executed="-3">
+    <body>	 * @return Connection</body>
+  </line>
+  <line lineNumber="266" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="267" executed="-3">
+    <body>	public function getConnection() {</body>
+  </line>
+  <line lineNumber="268" executed="5">
+    <body>		return $this-&gt;connection;</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+      <test name="testDescribe" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="244"/>
+      <test name="testDescribeFail" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="261"/>
+    </tests>
+  </line>
+  <line lineNumber="269" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="270" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="271" executed="-3">
+    <body>	/**</body>
+  </line>
+  <line lineNumber="272" executed="-3">
+    <body>	 * Returns strategy object.</body>
+  </line>
+  <line lineNumber="273" executed="-3">
+    <body>	 * @return Strategy</body>
+  </line>
+  <line lineNumber="274" executed="-3">
+    <body>	 */</body>
+  </line>
+  <line lineNumber="275" executed="-3">
+    <body>	public function getStrategy() {</body>
+  </line>
+  <line lineNumber="276" executed="3">
+    <body>		return $this-&gt;strategy;</body>
+    <tests>
+      <test name="testCreateByDSNMySQL" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="12"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+      <test name="testCreateByDSNSqlite" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="30"/>
+    </tests>
+  </line>
+  <line lineNumber="277" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="278" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="279" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="280" executed="-3">
+    <body>}</body>
+  </line>
+</coveredFile>

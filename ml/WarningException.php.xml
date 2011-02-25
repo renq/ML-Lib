@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coveredFile fullPath="/home/renq/Projects/www/ml_lib/ml/e2e/WarningException.php" shortenedPath="ml/e2e/WarningException.php" generated="1298673637" phpunit="3.4.13">
+  <line lineNumber="1" executed="-3">
+    <body>&lt;?php</body>
+  </line>
+  <line lineNumber="2" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="3" executed="-3">
+    <body>namespace ml\e2e;</body>
+  </line>
+  <line lineNumber="4" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="5" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="6" executed="1">
+    <body>class WarningException extends Exception { </body>
+    <tests>
+      <test name="testAutoload" status="0" class="E2eAutoloadTest" fullPath="/home/renq/Projects/www/ml_lib/tests/e2e/autoloadTest.php" shortenedPath="e2e/autoloadTest.php" line="9"/>
+    </tests>
+  </line>
+  <line lineNumber="7" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="8" executed="1">
+    <body>}</body>
+    <tests>
+      <test name="testAutoload" status="0" class="E2eAutoloadTest" fullPath="/home/renq/Projects/www/ml_lib/tests/e2e/autoloadTest.php" shortenedPath="e2e/autoloadTest.php" line="9"/>
+    </tests>
+  </line>
+</coveredFile>

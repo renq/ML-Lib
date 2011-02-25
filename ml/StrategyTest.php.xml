@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFile fullPath="/home/renq/Projects/www/ml_lib/tests//sql/StrategyTest.php" shortenedPath="sql/StrategyTest.php" generated="1298673637" phpunit="3.4.13">
+  <line lineNumber="1">
+    <body>&lt;?php</body>
+  </line>
+  <line lineNumber="2">
+    <body></body>
+  </line>
+  <line lineNumber="3">
+    <body></body>
+  </line>
+  <line lineNumber="4">
+    <body>use ml\sql\Strategy_MySQL;</body>
+  </line>
+  <line lineNumber="5">
+    <body>require_once dirname(__FILE__) . '/../../ml/ml.php';</body>
+  </line>
+  <line lineNumber="6">
+    <body></body>
+  </line>
+  <line lineNumber="7">
+    <body></body>
+  </line>
+  <line lineNumber="8">
+    <body>class StrategyTest extends PHPUnit_Framework_TestCase {</body>
+  </line>
+  <line lineNumber="9">
+    <body>	</body>
+  </line>
+  <line lineNumber="10">
+    <body>	</body>
+  </line>
+  <line lineNumber="11">
+    <body>	private $strategy;</body>
+  </line>
+  <line lineNumber="12">
+    <body>	</body>
+  </line>
+  <line lineNumber="13">
+    <body>	</body>
+  </line>
+  <line lineNumber="14">
+    <body>	public function setUp() {</body>
+  </line>
+  <line lineNumber="15">
+    <body>		$settings = $this-&gt;getMock('ml\sql\Settings');</body>
+  </line>
+  <line lineNumber="16">
+    <body>		$connection = $this-&gt;getMock('ml\sql\Connection', array(), array($settings));</body>
+  </line>
+  <line lineNumber="17">
+    <body>		$this-&gt;strategy = new Strategy_MySQL($connection); </body>
+  </line>
+  <line lineNumber="18">
+    <body>	}</body>
+  </line>
+  <line lineNumber="19">
+    <body>	</body>
+  </line>
+  <line lineNumber="20">
+    <body></body>
+  </line>
+  <line lineNumber="21">
+    <body>    public function testOne() {</body>
+  </line>
+  <line lineNumber="22">
+    <body>    	$this-&gt;assertEquals("query", $this-&gt;strategy-&gt;one("query"));</body>
+  </line>
+  <line lineNumber="23">
+    <body>    }</body>
+  </line>
+  <line lineNumber="24">
+    <body>    </body>
+  </line>
+  <line lineNumber="25">
+    <body>    </body>
+  </line>
+  <line lineNumber="26">
+    <body>    private function removeDoubleSpaces($string) {</body>
+  </line>
+  <line lineNumber="27">
+    <body>    	return trim(preg_replace('/[\s]+/', ' ', $string));</body>
+  </line>
+  <line lineNumber="28">
+    <body>    }</body>
+  </line>
+  <line lineNumber="29">
+    <body>    </body>
+  </line>
+  <line lineNumber="30">
+    <body>    </body>
+  </line>
+  <line lineNumber="31">
+    <body>	public function testById() {</body>
+  </line>
+  <line lineNumber="32">
+    <body>		$e = $this-&gt;strategy-&gt;getEscapeIdentifierCharacter();</body>
+  </line>
+  <line lineNumber="33">
+    <body>		$byId = $this-&gt;removeDoubleSpaces($this-&gt;strategy-&gt;byId('table', 'table_id'));</body>
+  </line>
+  <line lineNumber="34">
+    <body>    	$this-&gt;assertEquals("SELECT * FROM {$e}table{$e} WHERE {$e}table_id{$e} = ?", $byId);</body>
+  </line>
+  <line lineNumber="35">
+    <body>    }</body>
+  </line>
+  <line lineNumber="36">
+    <body>    </body>
+  </line>
+  <line lineNumber="37">
+    <body>    </body>
+  </line>
+  <line lineNumber="38">
+    <body>	public function testInsert() {</body>
+  </line>
+  <line lineNumber="39">
+    <body>		$e = $this-&gt;strategy-&gt;getEscapeIdentifierCharacter();</body>
+  </line>
+  <line lineNumber="40">
+    <body>		$params = array(</body>
+  </line>
+  <line lineNumber="41">
+    <body>			'name' =&gt; 'My Name',</body>
+  </line>
+  <line lineNumber="42">
+    <body>			'city' =&gt; 'Warsaw',</body>
+  </line>
+  <line lineNumber="43">
+    <body>			'when' =&gt; '2010-02-20',</body>
+  </line>
+  <line lineNumber="44">
+    <body>		);</body>
+  </line>
+  <line lineNumber="45">
+    <body>		$query = $this-&gt;removeDoubleSpaces($this-&gt;strategy-&gt;insert('table', $params));</body>
+  </line>
+  <line lineNumber="46">
+    <body>		$expected = "INSERT INTO {$e}table{$e} ({$e}name{$e}, {$e}city{$e}, {$e}when{$e}) VALUES (?, ?, ?)";</body>
+  </line>
+  <line lineNumber="47">
+    <body>    	$this-&gt;assertEquals($expected, $query);</body>
+  </line>
+  <line lineNumber="48">
+    <body>    }</body>
+  </line>
+  <line lineNumber="49">
+    <body>    </body>
+  </line>
+  <line lineNumber="50">
+    <body>    </body>
+  </line>
+  <line lineNumber="51">
+    <body>	public function testUpdate() {</body>
+  </line>
+  <line lineNumber="52">
+    <body>		$e = $this-&gt;strategy-&gt;getEscapeIdentifierCharacter();</body>
+  </line>
+  <line lineNumber="53">
+    <body>		$params = array(</body>
+  </line>
+  <line lineNumber="54">
+    <body>			'name' =&gt; 'My Name',</body>
+  </line>
+  <line lineNumber="55">
+    <body>			'city' =&gt; 'Warsaw',</body>
+  </line>
+  <line lineNumber="56">
+    <body>			'when' =&gt; '2010-02-20',</body>
+  </line>
+  <line lineNumber="57">
+    <body>		);</body>
+  </line>
+  <line lineNumber="58">
+    <body>		$query = $this-&gt;removeDoubleSpaces($this-&gt;strategy-&gt;update('table', $params, 'id'));</body>
+  </line>
+  <line lineNumber="59">
+    <body>		$expected = "UPDATE {$e}table{$e} SET {$e}name{$e} = ?, {$e}city{$e} = ?, {$e}when{$e} = ? WHERE {$e}id{$e} = ?";</body>
+  </line>
+  <line lineNumber="60">
+    <body>    	$this-&gt;assertEquals($expected, $query);</body>
+  </line>
+  <line lineNumber="61">
+    <body>    }</body>
+  </line>
+  <line lineNumber="62">
+    <body>    </body>
+  </line>
+  <line lineNumber="63">
+    <body>    </body>
+  </line>
+  <line lineNumber="64">
+    <body>	public function testDelete() {</body>
+  </line>
+  <line lineNumber="65">
+    <body>		$e = $this-&gt;strategy-&gt;getEscapeIdentifierCharacter();</body>
+  </line>
+  <line lineNumber="66">
+    <body>		$query = $this-&gt;removeDoubleSpaces($this-&gt;strategy-&gt;delete('table', 'id'));</body>
+  </line>
+  <line lineNumber="67">
+    <body>		$expected = "DELETE FROM {$e}table{$e} WHERE {$e}id{$e} = ?";</body>
+  </line>
+  <line lineNumber="68">
+    <body>    	$this-&gt;assertEquals($expected, $query);</body>
+  </line>
+  <line lineNumber="69">
+    <body>    }</body>
+  </line>
+  <line lineNumber="70">
+    <body>    </body>
+  </line>
+  <line lineNumber="71">
+    <body>    </body>
+  </line>
+  <line lineNumber="72">
+    <body>	public function testDescribe() {</body>
+  </line>
+  <line lineNumber="73">
+    <body>		$query = $this-&gt;removeDoubleSpaces($this-&gt;strategy-&gt;describe());</body>
+  </line>
+  <line lineNumber="74">
+    <body>		$expected = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ?";</body>
+  </line>
+  <line lineNumber="75">
+    <body>    	$this-&gt;assertEquals($expected, $query);</body>
+  </line>
+  <line lineNumber="76">
+    <body>    }</body>
+  </line>
+  <line lineNumber="77">
+    <body>    </body>
+  </line>
+  <line lineNumber="78">
+    <body>    </body>
+  </line>
+  <line lineNumber="79">
+    <body>    public function testEscapeIdentifierSetterAndGetter() {</body>
+  </line>
+  <line lineNumber="80">
+    <body>    	$e = '\\';</body>
+  </line>
+  <line lineNumber="81">
+    <body>    	$this-&gt;strategy-&gt;setEscapeIdentifierCharacter($e);</body>
+  </line>
+  <line lineNumber="82">
+    <body>    	$this-&gt;assertEquals($e, $this-&gt;strategy-&gt;getEscapeIdentifierCharacter());</body>
+  </line>
+  <line lineNumber="83">
+    <body>    }</body>
+  </line>
+  <line lineNumber="84">
+    <body>    </body>
+  </line>
+  <line lineNumber="85">
+    <body>    </body>
+  </line>
+  <line lineNumber="86">
+    <body>}</body>
+  </line>
+</testFile>

@@ -39,7 +39,7 @@ class SQL {
 		switch ($settings->getDriver()) {
 			case 'mysql':
 				$connection = new Connection_PDO_MySQL($settings);
-				$strategy = new Strategy_Mysql($connection);
+				$strategy = new Strategy_MySQL($connection);
 				return new SQL($connection, $strategy);
 			case 'pgsql':
 				$connection = new Connection_PDO_PostgreSQL($settings);
@@ -125,7 +125,7 @@ class SQL {
 	 */
 	public function value($query, array $params = array()) {
 		$tmp = $this->one($query, $params);
-		if (is_array($tmp)) {
+		if (!empty($tmp) && is_array($tmp)) {
 			return array_shift($tmp);
 		} 
 		else {
@@ -208,11 +208,7 @@ class SQL {
 			$id = $params[$idColumn];
 		}
 		$params = array_merge($params, $extraParams);
-		if (!empty($params)) {
-			$id = $this->save($table, $params, $id);
-			return $id;
-		}
-		return null;
+		return $this->save($table, $params, $id);
 	}
 	
 	/**
@@ -260,46 +256,9 @@ class SQL {
 			}
 			return $result;
 		}
-		return false;
+		throw new SqlException("Desribe fail. Probably table '$table' doesn't exists.");
 	}
 	
-	//--- debug
-	
-	/**
-	 * Returns debug informations.
-	 * @return array
-	 */
-	public function getDebug() {
-		return $this->connection->getDebug();
-	}
-	
-	
-	public function setDebugLevel($debug) {
-		$this->connection->debug = $debug;
-	}
-	
-	
-	/**
-	 * True, when debug is on.
-	 * @return boolean
-	 */
-	public function getDebugLevel() {
-		return $this->connection->debug;
-	}
-	
-	
-	public function __get($name) {
-		if ($name == 'debug') {
-			return $this->getDebugLevel();
-		}
-	}
-	
-	
-	public function __set($name, $value) {
-		if ($name == 'debug') {
-			$this->setDebugLevel($value);
-		}
-	}
 	
 	/**
 	 * Returns connection object.

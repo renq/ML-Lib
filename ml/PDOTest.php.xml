@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testFile fullPath="/home/renq/Projects/www/ml_lib/tests//sql/Connection/PDOTest.php" shortenedPath="sql/Connection/PDOTest.php" generated="1298673637" phpunit="3.4.13">
+  <line lineNumber="1">
+    <body>&lt;?php</body>
+  </line>
+  <line lineNumber="2">
+    <body></body>
+  </line>
+  <line lineNumber="3">
+    <body>use ml\sql\Connection_PDO_Sqlite;</body>
+  </line>
+  <line lineNumber="4">
+    <body>use ml\sql\Settings;</body>
+  </line>
+  <line lineNumber="5">
+    <body></body>
+  </line>
+  <line lineNumber="6">
+    <body></body>
+  </line>
+  <line lineNumber="7">
+    <body>require_once dirname(__FILE__) . '../../../../ml/ml.php';</body>
+  </line>
+  <line lineNumber="8">
+    <body></body>
+  </line>
+  <line lineNumber="9">
+    <body></body>
+  </line>
+  <line lineNumber="10">
+    <body>class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {</body>
+  </line>
+  <line lineNumber="11">
+    <body></body>
+  </line>
+  <line lineNumber="12">
+    <body>	</body>
+  </line>
+  <line lineNumber="13">
+    <body>	protected $connection;</body>
+  </line>
+  <line lineNumber="14">
+    <body>	</body>
+  </line>
+  <line lineNumber="15">
+    <body>	</body>
+  </line>
+  <line lineNumber="16">
+    <body>	protected function setUp() {</body>
+  </line>
+  <line lineNumber="17">
+    <body>		include(__DIR__ . '/../../config.php');</body>
+  </line>
+  <line lineNumber="18">
+    <body>		$db  = $config['sqlite_db'];</body>
+  </line>
+  <line lineNumber="19">
+    <body>		unlink($db);</body>
+  </line>
+  <line lineNumber="20">
+    <body>		$settings = new Settings("sqlite:///$db");</body>
+  </line>
+  <line lineNumber="21">
+    <body>		$this-&gt;connection = new Connection_PDO_Sqlite($settings);</body>
+  </line>
+  <line lineNumber="22">
+    <body>	}</body>
+  </line>
+  <line lineNumber="23">
+    <body>	</body>
+  </line>
+  <line lineNumber="24">
+    <body>	</body>
+  </line>
+  <line lineNumber="25">
+    <body>	private function createTable() {</body>
+  </line>
+  <line lineNumber="26">
+    <body>		$this-&gt;connection-&gt;query("CREATE TABLE cat (</body>
+  </line>
+  <line lineNumber="27">
+    <body>			id INTEGER PRIMARY KEY AUTOINCREMENT,</body>
+  </line>
+  <line lineNumber="28">
+    <body>			name VARCHAR(50),</body>
+  </line>
+  <line lineNumber="29">
+    <body>			colour VARCHAR(50)</body>
+  </line>
+  <line lineNumber="30">
+    <body>		)");</body>
+  </line>
+  <line lineNumber="31">
+    <body>		$this-&gt;connection-&gt;query("INSERT INTO cat (name, colour) VALUES (?, ?)", array("Simon's Cat", 'black'));</body>
+  </line>
+  <line lineNumber="32">
+    <body>		$this-&gt;connection-&gt;query("INSERT INTO cat (name, colour) VALUES (?, ?)", array("Garfield", 'ginger'));</body>
+  </line>
+  <line lineNumber="33">
+    <body>	}</body>
+  </line>
+  <line lineNumber="34">
+    <body>	</body>
+  </line>
+  <line lineNumber="35">
+    <body>	</body>
+  </line>
+  <line lineNumber="36">
+    <body>	public function testDisconnect() {</body>
+  </line>
+  <line lineNumber="37">
+    <body>    	$this-&gt;assertNull($this-&gt;connection-&gt;getHandle());</body>
+  </line>
+  <line lineNumber="38">
+    <body>    	$this-&gt;connection-&gt;query("SELECT DATE('now')");</body>
+  </line>
+  <line lineNumber="39">
+    <body>    	$this-&gt;assertTrue(($handle = $this-&gt;connection-&gt;getHandle()) instanceof PDO, "After connect handle should be instance of PDO, but it is: ".get_class($handle));</body>
+  </line>
+  <line lineNumber="40">
+    <body>    	$this-&gt;connection-&gt;disconnect();</body>
+  </line>
+  <line lineNumber="41">
+    <body>    	$this-&gt;assertNull($this-&gt;connection-&gt;getHandle());</body>
+  </line>
+  <line lineNumber="42">
+    <body>    }</body>
+  </line>
+  <line lineNumber="43">
+    <body>    </body>
+  </line>
+  <line lineNumber="44">
+    <body>    </body>
+  </line>
+  <line lineNumber="45">
+    <body>    public function testQuery() {</body>
+  </line>
+  <line lineNumber="46">
+    <body>		$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="47">
+    <body>		$statement = $this-&gt;connection-&gt;query("SELECT * FROM cat");</body>
+  </line>
+  <line lineNumber="48">
+    <body>		$row = $this-&gt;connection-&gt;fetch($statement);</body>
+  </line>
+  <line lineNumber="49">
+    <body>		$this-&gt;assertEquals("Simon's Cat", $row['name']);</body>
+  </line>
+  <line lineNumber="50">
+    <body>		$row = $this-&gt;connection-&gt;fetch($statement);</body>
+  </line>
+  <line lineNumber="51">
+    <body>		$this-&gt;assertEquals("Garfield", $row['name']);</body>
+  </line>
+  <line lineNumber="52">
+    <body>    }</body>
+  </line>
+  <line lineNumber="53">
+    <body>    </body>
+  </line>
+  <line lineNumber="54">
+    <body>    </body>
+  </line>
+  <line lineNumber="55">
+    <body>    public function testQueryTooFewBindFail() {</body>
+  </line>
+  <line lineNumber="56">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="57">
+    <body>    	$this-&gt;setExpectedException('ml\sql\BindException');</body>
+  </line>
+  <line lineNumber="58">
+    <body>    	$this-&gt;connection-&gt;query("SELECT * FROM cat WHERE name = ?", array());</body>
+  </line>
+  <line lineNumber="59">
+    <body>    }</body>
+  </line>
+  <line lineNumber="60">
+    <body>    </body>
+  </line>
+  <line lineNumber="61">
+    <body>    </body>
+  </line>
+  <line lineNumber="62">
+    <body>	public function testQueryTooMuchBindFail() {</body>
+  </line>
+  <line lineNumber="63">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="64">
+    <body>    	$this-&gt;setExpectedException('ml\sql\BindException');</body>
+  </line>
+  <line lineNumber="65">
+    <body>    	$this-&gt;connection-&gt;query("SELECT * FROM cat WHERE name = ?", array('Simon\'s', 'Cat'));</body>
+  </line>
+  <line lineNumber="66">
+    <body>    }</body>
+  </line>
+  <line lineNumber="67">
+    <body>    </body>
+  </line>
+  <line lineNumber="68">
+    <body>    </body>
+  </line>
+  <line lineNumber="69">
+    <body>    public function testEscape() {</body>
+  </line>
+  <line lineNumber="70">
+    <body>    	$this-&gt;assertEquals("'Simon''s Cat'", $this-&gt;connection-&gt;escape("Simon's Cat"));</body>
+  </line>
+  <line lineNumber="71">
+    <body>    	$this-&gt;assertEquals(12, $this-&gt;connection-&gt;escape(12));</body>
+  </line>
+  <line lineNumber="72">
+    <body>    	$this-&gt;assertEquals("'0012'", $this-&gt;connection-&gt;escape('0012'));</body>
+  </line>
+  <line lineNumber="73">
+    <body>    	$this-&gt;assertEquals('NULL', strtoupper($this-&gt;connection-&gt;escape(null)));</body>
+  </line>
+  <line lineNumber="74">
+    <body>    	$this-&gt;assertEquals("''", strtoupper($this-&gt;connection-&gt;escape('')));</body>
+  </line>
+  <line lineNumber="75">
+    <body>    	$this-&gt;assertEquals(1, $this-&gt;connection-&gt;escape(true));</body>
+  </line>
+  <line lineNumber="76">
+    <body>    }</body>
+  </line>
+  <line lineNumber="77">
+    <body>    </body>
+  </line>
+  <line lineNumber="78">
+    <body>    </body>
+  </line>
+  <line lineNumber="79">
+    <body>	public function testQuerySqlFail() {</body>
+  </line>
+  <line lineNumber="80">
+    <body>    	$this-&gt;setExpectedException('ml\sql\SqlException');</body>
+  </line>
+  <line lineNumber="81">
+    <body>    	$this-&gt;connection-&gt;query("SELECT * FROM ninja_table");</body>
+  </line>
+  <line lineNumber="82">
+    <body>    }</body>
+  </line>
+  <line lineNumber="83">
+    <body>    </body>
+  </line>
+  <line lineNumber="84">
+    <body>    </body>
+  </line>
+  <line lineNumber="85">
+    <body>	public function testLastInsertId() {</body>
+  </line>
+  <line lineNumber="86">
+    <body>		$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="87">
+    <body>    	$this-&gt;connection-&gt;query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));</body>
+  </line>
+  <line lineNumber="88">
+    <body>    	$this-&gt;assertEquals(3, $this-&gt;connection-&gt;lastInsertId('cat'));</body>
+  </line>
+  <line lineNumber="89">
+    <body>    	$this-&gt;assertEquals(3, $this-&gt;connection-&gt;lastInsertId());</body>
+  </line>
+  <line lineNumber="90">
+    <body>    	$this-&gt;connection-&gt;query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Misia', 'white-black-gray stripes'));</body>
+  </line>
+  <line lineNumber="91">
+    <body>    	$this-&gt;assertEquals(4, $this-&gt;connection-&gt;lastInsertId());</body>
+  </line>
+  <line lineNumber="92">
+    <body>    }</body>
+  </line>
+  <line lineNumber="93">
+    <body>    </body>
+  </line>
+  <line lineNumber="94">
+    <body>    </body>
+  </line>
+  <line lineNumber="95">
+    <body>    public function testTransactionRollback() {</body>
+  </line>
+  <line lineNumber="96">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="97">
+    <body>    	$this-&gt;connection-&gt;beginTransaction();</body>
+  </line>
+  <line lineNumber="98">
+    <body>    	$this-&gt;connection-&gt;query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));</body>
+  </line>
+  <line lineNumber="99">
+    <body>    	$this-&gt;connection-&gt;rollback();</body>
+  </line>
+  <line lineNumber="100">
+    <body>    	$statement = $this-&gt;connection-&gt;query("SELECT count(*) AS c FROM cat");</body>
+  </line>
+  <line lineNumber="101">
+    <body>    	$row = $this-&gt;connection-&gt;fetch($statement);</body>
+  </line>
+  <line lineNumber="102">
+    <body>    	$count = array_shift($row);</body>
+  </line>
+  <line lineNumber="103">
+    <body>    	$this-&gt;assertEquals(2, $count);</body>
+  </line>
+  <line lineNumber="104">
+    <body>    }</body>
+  </line>
+  <line lineNumber="105">
+    <body>    </body>
+  </line>
+  <line lineNumber="106">
+    <body>    </body>
+  </line>
+  <line lineNumber="107">
+    <body>	public function testTransactionCommit() {</body>
+  </line>
+  <line lineNumber="108">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="109">
+    <body>    	$this-&gt;connection-&gt;beginTransaction();</body>
+  </line>
+  <line lineNumber="110">
+    <body>    	$this-&gt;connection-&gt;query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));</body>
+  </line>
+  <line lineNumber="111">
+    <body>    	$this-&gt;connection-&gt;commit();</body>
+  </line>
+  <line lineNumber="112">
+    <body>    	$statement = $this-&gt;connection-&gt;query("SELECT count(*) AS c FROM cat");</body>
+  </line>
+  <line lineNumber="113">
+    <body>    	$row = $this-&gt;connection-&gt;fetch($statement);</body>
+  </line>
+  <line lineNumber="114">
+    <body>    	$count = array_shift($row);</body>
+  </line>
+  <line lineNumber="115">
+    <body>    	$this-&gt;assertEquals(3, $count);</body>
+  </line>
+  <line lineNumber="116">
+    <body>    }</body>
+  </line>
+  <line lineNumber="117">
+    <body>    </body>
+  </line>
+  <line lineNumber="118">
+    <body>    </body>
+  </line>
+  <line lineNumber="119">
+    <body>	public function testFetchEOF() {</body>
+  </line>
+  <line lineNumber="120">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="121">
+    <body>    	$statement = $this-&gt;connection-&gt;query("SELECT * FROM cat");</body>
+  </line>
+  <line lineNumber="122">
+    <body>    	$this-&gt;connection-&gt;fetch($statement); // Simon's Cat</body>
+  </line>
+  <line lineNumber="123">
+    <body>    	$this-&gt;connection-&gt;fetch($statement); // Garfield</body>
+  </line>
+  <line lineNumber="124">
+    <body>    	$this-&gt;assertFalse($this-&gt;connection-&gt;fetch($statement));</body>
+  </line>
+  <line lineNumber="125">
+    <body>    }</body>
+  </line>
+  <line lineNumber="126">
+    <body>    </body>
+  </line>
+  <line lineNumber="127">
+    <body>    </body>
+  </line>
+  <line lineNumber="128">
+    <body>    public function testBuildQuery() {</body>
+  </line>
+  <line lineNumber="129">
+    <body>    	$query = "SELECT * FROM cat WHERE name = ?";</body>
+  </line>
+  <line lineNumber="130">
+    <body>    	$params = array('Garfield');</body>
+  </line>
+  <line lineNumber="131">
+    <body>    	$expected = "SELECT * FROM cat WHERE name = 'Garfield'";</body>
+  </line>
+  <line lineNumber="132">
+    <body>    	$build = $this-&gt;connection-&gt;buildSql($query, $params);</body>
+  </line>
+  <line lineNumber="133">
+    <body>    	$this-&gt;assertEquals($expected, $build);</body>
+  </line>
+  <line lineNumber="134">
+    <body>    }</body>
+  </line>
+  <line lineNumber="135">
+    <body>    </body>
+  </line>
+  <line lineNumber="136">
+    <body>    </body>
+  </line>
+  <line lineNumber="137">
+    <body>    public function testDebug() {</body>
+  </line>
+  <line lineNumber="138">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="139">
+    <body>    	$this-&gt;connection-&gt;debug = false;</body>
+  </line>
+  <line lineNumber="140">
+    <body>    	$build = $this-&gt;connection-&gt;query("SELECT * FROM cat");</body>
+  </line>
+  <line lineNumber="141">
+    <body>    	$debug = $this-&gt;connection-&gt;getDebug();</body>
+  </line>
+  <line lineNumber="142">
+    <body>    	$this-&gt;assertTrue(empty($debug));</body>
+  </line>
+  <line lineNumber="143">
+    <body>    	</body>
+  </line>
+  <line lineNumber="144">
+    <body>    	$this-&gt;connection-&gt;debug = true;</body>
+  </line>
+  <line lineNumber="145">
+    <body>    	$build = $this-&gt;connection-&gt;query("SELECT * FROM cat");</body>
+  </line>
+  <line lineNumber="146">
+    <body>    	$build = $this-&gt;connection-&gt;query("INSERT INTO CAT (name, colour) VALUES (?, ?)", array('Misia', 'Striped'));</body>
+  </line>
+  <line lineNumber="147">
+    <body>    	</body>
+  </line>
+  <line lineNumber="148">
+    <body>    	$this-&gt;assertTrue(count($this-&gt;connection-&gt;getDebug()) == 2);</body>
+  </line>
+  <line lineNumber="149">
+    <body>    }</body>
+  </line>
+  <line lineNumber="150">
+    <body>    </body>
+  </line>
+  <line lineNumber="151">
+    <body>    </body>
+  </line>
+  <line lineNumber="152">
+    <body>    public function testGetAffectedRowsUpdate() {</body>
+  </line>
+  <line lineNumber="153">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="154">
+    <body>		$statement = $this-&gt;connection-&gt;query("UPDATE cat SET colour = ?", array('white'));</body>
+  </line>
+  <line lineNumber="155">
+    <body>		$this-&gt;assertEquals(2 , $this-&gt;connection-&gt;getAffectedRows());</body>
+  </line>
+  <line lineNumber="156">
+    <body>    }</body>
+  </line>
+  <line lineNumber="157">
+    <body>    </body>
+  </line>
+  <line lineNumber="158">
+    <body>    </body>
+  </line>
+  <line lineNumber="159">
+    <body>	public function testGetAffectedRowsInsert() {</body>
+  </line>
+  <line lineNumber="160">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="161">
+    <body>		$statement = $this-&gt;connection-&gt;query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));</body>
+  </line>
+  <line lineNumber="162">
+    <body>		$this-&gt;assertEquals(1 , $this-&gt;connection-&gt;getAffectedRows());</body>
+  </line>
+  <line lineNumber="163">
+    <body>    }</body>
+  </line>
+  <line lineNumber="164">
+    <body>    </body>
+  </line>
+  <line lineNumber="165">
+    <body>    </body>
+  </line>
+  <line lineNumber="166">
+    <body>	public function testGetAffectedRowsDelete() {</body>
+  </line>
+  <line lineNumber="167">
+    <body>    	$this-&gt;createTable();</body>
+  </line>
+  <line lineNumber="168">
+    <body>		$statement = $this-&gt;connection-&gt;query("INSERT INTO cat (name, colour) VALUES (?, ?)", array('Nennek', 'black'));</body>
+  </line>
+  <line lineNumber="169">
+    <body>		$statement = $this-&gt;connection-&gt;query("DELETE FROM cat WHERE id = ?", array(1));</body>
+  </line>
+  <line lineNumber="170">
+    <body>		$this-&gt;assertEquals(1 , $this-&gt;connection-&gt;getAffectedRows());</body>
+  </line>
+  <line lineNumber="171">
+    <body>    }</body>
+  </line>
+  <line lineNumber="172">
+    <body>    </body>
+  </line>
+  <line lineNumber="173">
+    <body>    </body>
+  </line>
+  <line lineNumber="174">
+    <body>	public function testGetAffectedNoQuery() {</body>
+  </line>
+  <line lineNumber="175">
+    <body>		$this-&gt;setExpectedException('\ml\sql\SqlException');</body>
+  </line>
+  <line lineNumber="176">
+    <body>    	$this-&gt;connection-&gt;getAffectedRows();</body>
+  </line>
+  <line lineNumber="177">
+    <body>    }</body>
+  </line>
+  <line lineNumber="178">
+    <body>    </body>
+  </line>
+  <line lineNumber="179">
+    <body></body>
+  </line>
+  <line lineNumber="180">
+    <body>}</body>
+  </line>
+</testFile>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coveredFile fullPath="/home/renq/Projects/www/ml_lib/ml/sql/Strategy/PostgreSQL.php" shortenedPath="ml/sql/Strategy/PostgreSQL.php" generated="1298673637" phpunit="3.4.13">
+  <line lineNumber="1" executed="-3">
+    <body>&lt;?php</body>
+  </line>
+  <line lineNumber="2" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="3" executed="-3">
+    <body>namespace ml\sql;</body>
+  </line>
+  <line lineNumber="4" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="5" executed="-3">
+    <body></body>
+  </line>
+  <line lineNumber="6" executed="1">
+    <body>class Strategy_PostgreSQL extends Strategy {</body>
+    <tests>
+      <test name="testAutoload" status="0" class="SqlAutoloadTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/autoloadTest.php" shortenedPath="sql/autoloadTest.php" line="9"/>
+    </tests>
+  </line>
+  <line lineNumber="7" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="8" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="9" executed="-3">
+    <body>	public function __construct(Connection $connection) {</body>
+  </line>
+  <line lineNumber="10" executed="2">
+    <body>		parent::__construct($connection);</body>
+    <tests>
+      <test name="testLimit" status="0" class="SqlStrategyPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Strategy/PostgreSQLTest.php" shortenedPath="sql/Strategy/PostgreSQLTest.php" line="13"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+    </tests>
+  </line>
+  <line lineNumber="11" executed="2">
+    <body>		$this-&gt;escapeIdentifierCharacter = '"';</body>
+    <tests>
+      <test name="testLimit" status="0" class="SqlStrategyPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Strategy/PostgreSQLTest.php" shortenedPath="sql/Strategy/PostgreSQLTest.php" line="13"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+    </tests>
+  </line>
+  <line lineNumber="12" executed="2">
+    <body>	}</body>
+    <tests>
+      <test name="testLimit" status="0" class="SqlStrategyPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Strategy/PostgreSQLTest.php" shortenedPath="sql/Strategy/PostgreSQLTest.php" line="13"/>
+      <test name="testCreateByDSNPostgresql" status="0" class="SQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/SQLTest.php" shortenedPath="sql/SQLTest.php" line="21"/>
+    </tests>
+  </line>
+  <line lineNumber="13" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="14" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="15" executed="-3">
+    <body>	public function limit($query, $limit, $offset) {</body>
+  </line>
+  <line lineNumber="16" executed="1">
+    <body>		$limit = (int)$limit;</body>
+    <tests>
+      <test name="testLimit" status="0" class="SqlStrategyPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Strategy/PostgreSQLTest.php" shortenedPath="sql/Strategy/PostgreSQLTest.php" line="13"/>
+    </tests>
+  </line>
+  <line lineNumber="17" executed="1">
+    <body>		$offset = (int)$offset;</body>
+    <tests>
+      <test name="testLimit" status="0" class="SqlStrategyPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Strategy/PostgreSQLTest.php" shortenedPath="sql/Strategy/PostgreSQLTest.php" line="13"/>
+    </tests>
+  </line>
+  <line lineNumber="18" executed="1">
+    <body>		return "$query LIMIT $limit OFFSET $offset";</body>
+    <tests>
+      <test name="testLimit" status="0" class="SqlStrategyPostgreSQLTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/Strategy/PostgreSQLTest.php" shortenedPath="sql/Strategy/PostgreSQLTest.php" line="13"/>
+    </tests>
+  </line>
+  <line lineNumber="19" executed="-2">
+    <body>	}</body>
+  </line>
+  <line lineNumber="20" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="21" executed="-3">
+    <body>	</body>
+  </line>
+  <line lineNumber="22" executed="1">
+    <body>}</body>
+    <tests>
+      <test name="testAutoload" status="0" class="SqlAutoloadTest" fullPath="/home/renq/Projects/www/ml_lib/tests/sql/autoloadTest.php" shortenedPath="sql/autoloadTest.php" line="9"/>
+    </tests>
+  </line>
+</coveredFile>

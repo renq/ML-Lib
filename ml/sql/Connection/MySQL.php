@@ -16,7 +16,7 @@ class Connection_MySQL extends Connection {
 	
 	
 	static public function useCurrent($handle) {
-		$new = new Connection_Mysql(new Settings());
+		$new = new Connection_MySQL(new Settings());
 		$new->handle = $handle;
 		return $new;
 	}
