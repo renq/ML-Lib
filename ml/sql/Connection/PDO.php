@@ -82,7 +82,7 @@ abstract class Connection_PDO extends Connection {
 	}
 	
 	
-	public function lastInsertId($table = '') {
+	public function lastInsertId($table = '', $idColumn = '') {
 		$this->connect();
 		return $this->handle->lastInsertId();
 	}

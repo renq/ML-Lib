@@ -82,10 +82,11 @@ abstract class Connection {
 	
 	/**
 	 * Returns last inset id.
-	 * @param string $table
+	 * @param string $table Table name
+	 * @param string $table identify column name
 	 * @return int
 	 */
-	public abstract function lastInsertId($table = '');
+	public abstract function lastInsertId($table = '', $idColumn = '');
 	
 	/**
 	 * Returns databse connection.

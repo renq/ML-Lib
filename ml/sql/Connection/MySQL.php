@@ -114,7 +114,7 @@ class Connection_MySQL extends Connection {
 	}
 	
 	
-	public function lastInsertId($table = '') {
+	public function lastInsertId($table = '', $idColumn = '') {
 		$this->connect();
 		return mysql_insert_id($this->handle);
 	}

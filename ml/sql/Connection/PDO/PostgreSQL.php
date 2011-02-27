@@ -6,6 +6,8 @@ namespace ml\sql;
 class Connection_PDO_PostgreSQL extends Connection_PDO {
 	
 	
+	private $serialSequenceCache = array();
+	
 	
 	public function __construct(Settings $settings) {
 		parent::__construct($settings);
@@ -30,6 +32,24 @@ class Connection_PDO_PostgreSQL extends Connection_PDO {
 		catch (\PDOException $e) {
 			throw new Exception('Can\'t open database: '.$e->getMessage()); 
 		}
+	}
+
+	
+	public function getSerialSequence($table, $idColumn) {
+		if (isset($this->serialSequenceCache[$table][$idColumn])) {
+			return $this->serialSequenceCache[$table][$idColumn];
+		}
+		$sth = $this->query("SELECT pg_get_serial_sequence(?, ?) as seq_name", array($table, $idColumn));
+		$row = $this->fetch($sth);
+		$this->serialSequenceCache[$table][$idColumn] = $row['seq_name'];
+		return $row['seq_name'];
+	}
+	
+	
+	public function lastInsertId($table = '', $idColumn = '') {
+		$this->connect();
+		$sequenceName = $this->getSerialSequence($table, $idColumn);
+		return $this->handle->lastInsertId($sequenceName);
 	}
 	
 	

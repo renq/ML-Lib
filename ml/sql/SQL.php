@@ -192,7 +192,7 @@ class SQL {
 		else {
 			$query = $this->strategy->insert($table, $params);
 			$this->connection->query($query, $params);
-			return $this->connection->lastInsertId();
+			return $this->connection->lastInsertId($table, $idColumn);
 		}
 	}
 	
