@@ -85,7 +85,6 @@ class Connection_MySQL extends BaseConnection {
 	
 	
 	public function query($query, array $params = array()) {
-		parent::query($query, $params);
 		$this->connect();
 				
 		$n = substr_count($query, '?');

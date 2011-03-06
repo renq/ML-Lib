@@ -52,7 +52,6 @@ abstract class Connection_PDO extends BaseConnection {
 	
 	
 	public function query($query, array $params = array()) {
-		parent::query($query, $params);
 		$this->connect();
 		try {			
 			$numberOfPlaceholders = substr_count($query, '?');
@@ -64,8 +63,7 @@ abstract class Connection_PDO extends BaseConnection {
 			$sth->execute(array_values($params));
 		}
 		catch (\PDOException $e) {
-			$query = $this->buildSql($query, $params);
-			throw new SqlException('Query error: '.$e->getMessage().";\n$query", (int)$e->getCode(), $e);
+			throw new SqlException('Query error: '.$e->getMessage().";\nQuery: $query\n\nParameters: ".print_r($params, true), (int)$e->getCode(), $e);
 		}
 		$this->lastStatement = $sth;
 		return $sth;

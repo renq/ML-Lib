@@ -23,19 +23,7 @@ abstract class BaseConnection implements Connection {
 	 * @var Settings
 	 */
 	protected $settings;
-	
-	/**
-	 * Debug mode. If true, all queries are stored.
-	 * @var unknown_type
-	 */
-	public $debug = false;
-	
-	/**
-	 * Keep all runned queries. Works only if debug mode is on.
-	 * @var array
-	 */
-	private $debugData = array();
-	
+
 	
 	/**
 	 * Constructor
@@ -43,55 +31,6 @@ abstract class BaseConnection implements Connection {
 	 */
 	public function __construct(Settings $settings) {
 		$this->settings = $settings;
-	}
-	
-	
-	/**
-	 * Execute query.
-	 * @param string $query
-	 * @param array $params
-	 * @return mixed
-	 */
-	public function query($query, array $params = array()) {
-		if ($this->debug) {
-			$this->addToDebug($query, $params);
-		}
-	}
-	
-	
-	/**
-	 * Add query to query debug list. 
-	 * @param string $query
-	 * @param array $params
-	 */
-	protected function addToDebug($query, array $params = array()) {
-		$this->debugData[] = $this->buildSql($query, $params);
-	}
-	
-	/**
-	 * Builds query. This function shouldn'd be use in production code.
-	 * Debug queries are created with this function.
-	 * @param string $query
-	 * @param arry $params
-	 * @return string
-	 */
-	public function buildSql($query, $params) {
-		$count = 0;
-		$query = str_replace(array('%', '?'), array('%%', '%s'), $query, $count);
-		
-		foreach ($params as &$param) {
-			$param = $this->escape($param);
-		}
-		return vsprintf($query, $params);	
-	}
-	
-	
-	/**
-	 * Returns executed query. Works only if debug is on.
-	 * @return array
-	 */
-	public function getDebug() {
-		return $this->debugData;
 	}
 	
 	

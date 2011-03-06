@@ -66,6 +66,13 @@ interface Connection {
 	 */
 	public function query($query, array $params = array());
 	
+	
+	/**
+	 * Escape variable.
+	 * @param mixed
+	 */
+	public function escape($value);
+	
 	/**
 	 * Returns rows affected for last SQL operation.
 	 * @return int

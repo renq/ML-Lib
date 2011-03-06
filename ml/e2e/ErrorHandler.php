@@ -58,28 +58,28 @@ class ErrorHandler {
 		if (error_reporting() & $errno) {
 			switch ($errno) {
 				case E_NOTICE:
-					throw new NoticeException("E_NOTICE: $errstr", $errno);
+					throw new NoticeException("E_NOTICE: $errstr; File: $errfile; Line: $errline", $errno);
 			
 				case E_USER_NOTICE:
-					throw new UserNoticeException("E_USER_NOTICE: $errstr", $errno);
+					throw new UserNoticeException("E_USER_NOTICE: $errstr; File: $errfile; Line: $errline", $errno);
 			
 				case E_WARNING:
-					throw new WarningException("E_WARNING: $errstr", $errno);
+					throw new WarningException("E_WARNING: $errstr; File: $errfile; Line: $errline", $errno);
 			        
 				case E_USER_WARNING:
-			        throw new UserWarningException("E_USER_WARNING: $errstr", $errno);
+			        throw new UserWarningException("E_USER_WARNING: $errstr; File: $errfile; Line: $errline", $errno);
 			        
 				case E_STRICT:
-					throw new StrictException("E_STRICT: $errstr", $errno);
+					throw new StrictException("E_STRICT: $errstr; File: $errfile; Line: $errline", $errno);
 				
 				case E_DEPRECATED:
-					throw new DeprecatedException("E_DEPRECATED: $errstr", $errno);
+					throw new DeprecatedException("E_DEPRECATED: $errstr; File: $errfile; Line: $errline", $errno);
 				
 				case E_RECOVERABLE_ERROR:
-					throw new RecoverableErrorException("E_RECOVERABLE_ERROR: $errstr", $errno);
+					throw new RecoverableErrorException("E_RECOVERABLE_ERROR: $errstr; File: $errfile; Line: $errline", $errno);
 			
 			    default:
-			        throw new UnknownException("UNKNOWN: $errstr", $errno);
+			        throw new UnknownException("UNKNOWN: $errstr; File: $errfile; Line: $errline", $errno);
 		    }
 		}
 		return true;

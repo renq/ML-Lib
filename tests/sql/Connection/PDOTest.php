@@ -125,30 +125,6 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     }
     
     
-    public function testBuildQuery() {
-    	$query = "SELECT * FROM cat WHERE name = ?";
-    	$params = array('Garfield');
-    	$expected = "SELECT * FROM cat WHERE name = 'Garfield'";
-    	$build = $this->connection->buildSql($query, $params);
-    	$this->assertEquals($expected, $build);
-    }
-    
-    
-    public function testDebug() {
-    	$this->createTable();
-    	$this->connection->debug = false;
-    	$build = $this->connection->query("SELECT * FROM cat");
-    	$debug = $this->connection->getDebug();
-    	$this->assertTrue(empty($debug));
-    	
-    	$this->connection->debug = true;
-    	$build = $this->connection->query("SELECT * FROM cat");
-    	$build = $this->connection->query("INSERT INTO CAT (name, colour) VALUES (?, ?)", array('Misia', 'Striped'));
-    	
-    	$this->assertTrue(count($this->connection->getDebug()) == 2);
-    }
-    
-    
     public function testGetAffectedRowsUpdate() {
     	$this->createTable();
 		$statement = $this->connection->query("UPDATE cat SET colour = ?", array('white'));
