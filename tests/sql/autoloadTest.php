@@ -7,7 +7,7 @@ class SqlAutoloadTest extends PHPUnit_Framework_TestCase {
 	
 	
     public function testAutoload() {
-        $this->assertTrue(class_exists('ml\sql\Connection'));
+        $this->assertTrue(class_exists('ml\sql\BaseConnection'));
         $this->assertTrue(class_exists('ml\sql\Exception'));
         $this->assertTrue(class_exists('ml\sql\Settings'));
         $this->assertTrue(class_exists('ml\sql\SQL'));

@@ -1,5 +1,23 @@
+
+2.2
 @TODO
-- UNIT TESTS!
+- Connection debug move to Connection_Decorator_Debug. Create a cache decorator for Connection.
+
+2.2a (2011-03-04)
+- NAMESPACES!
+- Classes are compatibile with PSR-0 (http://groups.google.com/group/php-standards/web/psr-0-final-proposal?pli=1). 
+  Reorganisation of directory and file structure. 
+- Unit tests :) Code coverage 100%.
+- lot of bug fixes!
+- SQL finally works fine with Postgresql.
+- new method: SQL::createByDSN($dsnString)
+- removed deprecated methods: getOne and getFlatList
+- The lack of a better idea, removed methods from SQL: getDebug, setDebugLevel, getDebugLevel, __get and __set.
+  Methods are still available in Connection class.
+- method SQL::save now throws an exception if the ID updated row is invalid.
+- New method Connection::getAffectedRows() that returns number of modified rows
+  after INSERT, UPDATE od DELETE statement.
+- removed MSSQL Connection and Strategy. 
 
 
 2.1.1
@@ -8,6 +26,8 @@
 - new method: ML_SqlConnection::getSettings().
 - new method: ML_Settings::clearPassword().
 - new method: ML_Sql::saveFromRequest()
+@TODO
+- UNIT TESTS!
 
 2.1
 - Parsowanie DSN wyrzucone zostało z konstruktora ML_Sql do klasy ML_SqlSettings.

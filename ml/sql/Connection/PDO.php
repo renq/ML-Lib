@@ -9,7 +9,7 @@ namespace ml\sql;
  * @author Michał Lipek (michal@lipek.net)
  *
  */
-abstract class Connection_PDO extends Connection {
+abstract class Connection_PDO extends BaseConnection {
 	
 	protected $handle = null;
 	private $lastStatement = null;

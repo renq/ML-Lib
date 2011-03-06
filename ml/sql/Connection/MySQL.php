@@ -3,7 +3,7 @@
 namespace ml\sql;
 
 
-class Connection_MySQL extends Connection {
+class Connection_MySQL extends BaseConnection {
 	
 	private $lastQuery = null;
 	
