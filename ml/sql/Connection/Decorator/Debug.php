@@ -22,6 +22,24 @@ class Connection_Decorator_Debug extends Connection_Decorator {
 	}
 	
 	
+	public function beginTransaction() {
+		$this->queries[] = 'BEGIN TRANSACTION';
+		return $this->decorated->beginTransaction();
+	}
+	
+	
+	public function commit() {
+		$this->queries[] = 'COMMIT';
+		return $this->decorated->commit();
+	}
+	
+	
+	public function rollback() {
+		$this->queries[] = 'ROLLBACK';
+		return $this->decorated->rollback();
+	}
+	
+	
 	public function getDebug() {
 		return $this->queries;
 	}

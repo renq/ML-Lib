@@ -23,6 +23,18 @@ class SqlConnectionDecoratorDebugTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(array("SOME QUERY"), $decorator->getDebug());
 		$decorator->query("NEXT QUERY ?", array(15));
 		$this->assertEquals(array("SOME QUERY", "NEXT QUERY 15"), $decorator->getDebug());
+		
+		$decorator->beginTransaction();
+		$debug = $decorator->getDebug();
+		$this->assertEquals('BEGIN TRANSACTION', end($debug));
+		
+		$decorator->commit();
+		$debug = $decorator->getDebug();
+		$this->assertEquals('COMMIT', end($debug));
+		
+		$decorator->rollback();
+		$debug = $decorator->getDebug();
+		$this->assertEquals('ROLLBACK', end($debug));
 	}
 	
 
