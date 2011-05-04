@@ -66,7 +66,6 @@ interface Connection {
 	 */
 	public function query($query, array $params = array());
 	
-	
 	/**
 	 * Escape variable.
 	 * @param mixed

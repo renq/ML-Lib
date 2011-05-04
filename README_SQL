@@ -19,6 +19,7 @@
   after INSERT, UPDATE od DELETE statement.
 - removed shitty MSSQL support. 
 - Debug move to Connection_Decorator_Debug. 
+- new function in Strategy - escapeIdentifier(), which escapes identifier (table/column) name.
 
 
 2.1.1

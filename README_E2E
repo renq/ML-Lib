@@ -1,6 +1,6 @@
 
 Roadmap wersji 0.1:
-- logowanie do plików/bazy wszystkich komunikatów. Właściwie do klasy XXX z metodą log()... A w klasie niech się dzieje, co che. :)
+- logowanie do plików/bazy wszystkich komunikatów. Właściwie do klasy XXX z metodą log()... A w klasie niech się dzieje, co che. :) Można wykorzystać SPL Observer
 - własny wygląd niezłapanego wyjątku - set_exception_handler() - z możliwością zmiany wyglądu komunikatu przez użytkowników
 - możliwość wyłączenia wyjątków w aplikacji produkcyjnej z pozostawieniem zapisywania do plików
 - [odrzucone] wyłączenie wyjątków dla niektórych katalogów

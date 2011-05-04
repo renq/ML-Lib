@@ -54,8 +54,9 @@ abstract class Strategy {
 	 * @return string
 	 */
 	public function byId($table, $idColumn) {
-		$e = $this->escapeIdentifierCharacter;
-		return "SELECT * FROM {$e}$table{$e} WHERE {$e}$idColumn{$e} = ? ";
+		$table = $this->escapeIdentifier($table);
+		$idColumn = $this->escapeIdentifier($idColumn);
+		return "SELECT * FROM $table WHERE $idColumn = ? ";
 	}
 	
 	
@@ -66,14 +67,14 @@ abstract class Strategy {
 	 * @return string
 	 */
 	public function insert($table, array $params) {
-		$e = $this->escapeIdentifierCharacter;
+		$table = $this->escapeIdentifier($table);
 		$keys = array_keys($params);
 		foreach ($keys as &$key) {
-			$key = "{$e}$key{$e}";
+			$key = $this->escapeIdentifier($key);
 		}
 		$columns = implode(', ', $keys);
 		$qm = $this->qm(count($params));
-		return "INSERT INTO {$e}$table{$e} ($columns) VALUES ($qm) ";
+		return "INSERT INTO $table ($columns) VALUES ($qm) ";
 	}
 	
 	
@@ -85,13 +86,15 @@ abstract class Strategy {
 	 * @return string
 	 */
 	public function update($table, array $params, $idColumn) {
-		$e = $this->escapeIdentifierCharacter;
+		$table = $this->escapeIdentifier($table);
+		$idColumn = $this->escapeIdentifier($idColumn);
+		
 		$setParts = array();
 		foreach ($params as $k => $v) {
-			$setParts[] = "{$e}$k{$e} = ?";
+			$setParts[] = $this->escapeIdentifier($k) . ' = ?';
 		}
 		$set = implode(', ', $setParts);
-		return "UPDATE {$e}$table{$e} SET $set WHERE {$e}$idColumn{$e} = ? ";
+		return "UPDATE $table SET $set WHERE $idColumn = ? ";
 	}
 	
 	
@@ -102,8 +105,10 @@ abstract class Strategy {
 	 * @return string
 	 */
 	public function delete($table, $idColumn) {
-		$e = $this->escapeIdentifierCharacter;
-		return "DELETE FROM {$e}$table{$e} WHERE {$e}$idColumn{$e} = ? ";
+		$table = $this->escapeIdentifier($table);
+		$idColumn = $this->escapeIdentifier($idColumn);
+		
+		return "DELETE FROM $table WHERE $idColumn = ? ";
 	}
 	
 	
@@ -140,6 +145,22 @@ abstract class Strategy {
 	 */
 	public function setEscapeIdentifierCharacter($e) {
 		$this->escapeIdentifierCharacter = $e;
+	}
+	
+	
+	/**
+	 * 
+	 * Escape an identifier, i.e. table or column name.
+	 * @param string $name
+	 * @return string escaped identifier
+	 */
+	public function escapeIdentifier($name) {
+		$e = $this->getEscapeIdentifierCharacter();
+		$parts = \explode('.', $name);
+		foreach ($parts as &$part) {
+			$part = "{$e}$part{$e}";
+		}
+		return implode('.', $parts);
 	}
 
 

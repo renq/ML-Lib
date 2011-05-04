@@ -21,7 +21,6 @@ abstract class Connection_PDO extends BaseConnection {
 	
 	
 	public function disconnect() {
-		unset($this->handle);
 		$this->handle = null;
 	}
 	

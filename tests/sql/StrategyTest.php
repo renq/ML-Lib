@@ -69,6 +69,41 @@ class StrategyTest extends PHPUnit_Framework_TestCase {
     }
     
     
+    private function getStrategyMock() {
+    	$settings = $this->getMock('ml\sql\Settings');
+    	$connection = $this->getMockForAbstractClass('ml\sql\Connection_PDO', array($settings));
+    	return $this->getMock('ml\sql\Strategy_MySQL', array('escapeIdentifier'), array($connection));    	
+    }
+    
+    
+    public function testByIdUsingEscapeIdentifier() {
+		$strategy = $this->getStrategyMock();
+    	$strategy->expects($this->any())->method('escapeIdentifier');
+    	$strategy->byId('table', 1);
+    }
+    
+    
+    public function testInsertEscapeIdentifier() {
+		$strategy = $this->getStrategyMock();
+    	$strategy->expects($this->any())->method('escapeIdentifier');
+    	$strategy->insert('table', array('a' => 'b'));
+    }
+    
+    
+    public function testUpdateUsingEscapeIdentifier() {
+		$strategy = $this->getStrategyMock();
+    	$strategy->expects($this->any())->method('escapeIdentifier');
+    	$strategy->update('table', array('a' => 'b'), 1);
+    }
+    
+    
+    public function testDeleteUsingEscapeIdentifier() {
+		$strategy = $this->getStrategyMock();
+    	$strategy->expects($this->any())->method('escapeIdentifier');
+    	$strategy->delete('table', 1);
+    }
+    
+    
 	public function testDescribe() {
 		$query = $this->removeDoubleSpaces($this->strategy->describe());
 		$expected = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE table_schema = ? AND table_name = ?";
@@ -80,6 +115,16 @@ class StrategyTest extends PHPUnit_Framework_TestCase {
     	$e = '\\';
     	$this->strategy->setEscapeIdentifierCharacter($e);
     	$this->assertEquals($e, $this->strategy->getEscapeIdentifierCharacter());
+    }
+    
+    
+    public function testEscapeIdentifier() {
+    	$this->strategy->setEscapeIdentifierCharacter('"');
+    	$this->assertEquals('"table"', $this->strategy->escapeIdentifier('table'));
+    	$this->assertEquals('"database"."table"', $this->strategy->escapeIdentifier('database.table'));
+    	$this->assertEquals('"database"."table"."field"', $this->strategy->escapeIdentifier('database.table.field'));
+    	$this->strategy->setEscapeIdentifierCharacter('%^%');
+    	$this->assertEquals('%^%database%^%.%^%table%^%.%^%field%^%', $this->strategy->escapeIdentifier('database.table.field'));
     }
     
     
