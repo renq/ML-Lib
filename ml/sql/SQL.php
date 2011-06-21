@@ -34,6 +34,11 @@ class SQL {
 	}
 	
 	
+	/**
+	 * Create SQL object by DSN.
+ 	 * @param $dsn string 
+ 	 * @return SQL
+	 */
 	public static function createByDSN($dsn) {
 		$settings = new Settings($dsn);
 		switch ($settings->getDriver()) {
