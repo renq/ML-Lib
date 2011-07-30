@@ -55,6 +55,11 @@ class Connection_Decorator implements Connection {
 	}
 	
 	
+	public function setHandle($handle) {
+		$this->decorated->setHandle($handle);
+	}
+	
+	
 	public function escape($variable) {
 		return $this->decorated->escape($variable);
 	}

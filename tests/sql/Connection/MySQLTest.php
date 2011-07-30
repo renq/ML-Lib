@@ -140,12 +140,6 @@ class SqlConnectionMySQLTest extends PHPUnit_Framework_TestCase {
     }
     
     
-	public function testUseCurrent() {
-    	$newConnection = Connection_MySQL::useCurrent($this->connection->getHandle());
-    	$this->assertTrue($newConnection->getHandle() === $this->connection->getHandle());
-    }
-    
-    
     public function testGetAffectedRowsUpdate() {
     	$res = $this->connection->query("SELECT count(*) FROM cat");
 		$statement = $this->connection->query("UPDATE cat SET colour = ?", array('white'));

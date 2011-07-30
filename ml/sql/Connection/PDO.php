@@ -30,6 +30,11 @@ abstract class Connection_PDO extends BaseConnection {
 	}
 	
 	
+	public function setHandle($handle) {
+		$this->handle = $handle;
+	}
+	
+	
 	public function escape($value) {
 		$this->connect();
 		if (is_null($value)) {

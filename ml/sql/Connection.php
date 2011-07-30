@@ -58,6 +58,14 @@ interface Connection {
 	 */
 	public function getHandle();
 	
+	
+	/**
+	 * 
+	 * Sets database handle. 
+	 * @param resource $handle
+	 */
+	public function setHandle($handle);
+	
 	/**
 	 * Execute query.
 	 * @param string $query

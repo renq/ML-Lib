@@ -13,14 +13,7 @@ class Connection_MySQL extends BaseConnection {
 	public function __construct(Settings $settings) {
 		parent::__construct($settings);
 	}
-	
-	
-	static public function useCurrent($handle) {
-		$new = new Connection_MySQL(new Settings());
-		$new->handle = $handle;
-		return $new;
-	}
-	
+
 	
 	public function connect() {
 		if (is_resource($this->handle)) return false;
@@ -46,6 +39,11 @@ class Connection_MySQL extends BaseConnection {
 	
 	public function getHandle() {
 		return $this->handle;
+	}
+	
+	
+	public function setHandle($handle) {
+		$this->handle = $handle;
 	}
 	
 	

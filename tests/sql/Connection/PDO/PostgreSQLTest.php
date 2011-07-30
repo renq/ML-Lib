@@ -46,7 +46,7 @@ class SqlConnectionPDOPostgreSQLTest extends PHPUnit_Framework_TestCase {
     
     public function testSerialSequence() {
     	$this->connection->connect();
-    	$this->connection->query("DROP TABLE cats");
+    	$this->connection->query("DROP TABLE IF EXISTS cats");
     	$this->connection->query("
     		CREATE TABLE cats (
 				id serial NOT NULL PRIMARY KEY,
