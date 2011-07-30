@@ -25,7 +25,7 @@ class Connection_Decorator implements Connection {
 	
 	
 	public function fetch($queryResult) {
-		return $this->decorated->fetch(null);
+		return $this->decorated->fetch($queryResult);
 	}
 	
 	

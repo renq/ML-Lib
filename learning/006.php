@@ -20,7 +20,12 @@ $connection = new ml\sql\Connection_PDO_PostgreSQL(new ml\sql\Settings());
 $connection->setHandle($pdo);
 $strategy = new ml\sql\Strategy_PostgreSQL($connection);
 
-$sql = new SQL($connection, $strategy);
+$debug = new ml\sql\Connection_Decorator_Debug($connection);
+
+$sql = new SQL($debug, $strategy);
+
 
 print_r($sql->get("SELECT * FROM cats WHERE id = ?", array(1)));
 
+
+print_r($sql->getConnection()->getDebug());
