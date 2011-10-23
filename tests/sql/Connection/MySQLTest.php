@@ -168,6 +168,15 @@ class SqlConnectionMySQLTest extends PHPUnit_Framework_TestCase {
 		$this->setExpectedException('\ml\sql\SqlException');
     	$connection->getAffectedRows();
     }
+    
+    
+    public function testSetHandle() {
+    	$settings = $this->getMock('ml\sql\Settings', array(), array('dsn'), 'MockSettings', false);
+    	$connection = new Connection_MySQL($settings);
+    	$handle = 'some handle';
+    	$connection->setHandle($handle);
+    	$this->assertEquals($handle, $connection->getHandle());
+    }
 
 
 }

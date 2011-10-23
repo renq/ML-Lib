@@ -16,7 +16,9 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		include(__DIR__ . '/../../config.php');
 		$db  = $config['sqlite_db'];
-		unlink($db);
+		if (file_exists($db)) {
+			unlink($db);
+		}
 		$settings = new Settings("sqlite:///$db");
 		$this->connection = new Connection_PDO_Sqlite($settings);
 	}
@@ -150,6 +152,15 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
 	public function testGetAffectedNoQuery() {
 		$this->setExpectedException('\ml\sql\SqlException');
     	$this->connection->getAffectedRows();
+    }
+    
+    
+    public function testSetHandle() {
+    	$settings = $this->getMock('ml\sql\Settings', array(), array('dsn'), 'MockPDOSettings', false);
+    	$connection = $this->getMockForAbstractClass('ml\sql\Connection_PDO', array($settings), 'Connection_PDOMock');
+    	$handle = 'some handle';
+    	$connection->setHandle($handle);
+    	$this->assertEquals($handle, $connection->getHandle());
     }
     
 

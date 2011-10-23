@@ -76,6 +76,13 @@ class SqlConnectionDecoratorTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	
+	public function testSetHandle() {
+		$handle = 'anything';
+		$this->connection->expects($this->once())->method('setHandle')->with($this->equalTo($handle));
+		$this->decorated->setHandle($handle);
+	}
+	
+	
 	public function testQuery() {
 		$this->connection->expects($this->once())->method('query');
 		$this->decorated->query("QUERY", array());

@@ -9,7 +9,7 @@ $config = array(
 
 	'mysql_dsn' => 'mysql://root:mlsni2@127.0.0.1/information_schema',
 
-	'pgsql_dsn' => 'pgsql://postgres:mlsni2@localhost/postgres',
+	'pgsql_dsn' => 'pgsql://renq:test@localhost/mlsql',
 	
 
 );
