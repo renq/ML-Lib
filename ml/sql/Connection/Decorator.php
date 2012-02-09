@@ -75,4 +75,9 @@ class Connection_Decorator implements Connection {
 	}
 	
 	
+	public function getSettings() {
+		return $this->decorated->getSettings();
+	}
+	
+	
 }

@@ -86,6 +86,12 @@ interface Connection {
 	 */
 	public function getAffectedRows();
 	
+	/**
+	 * Returns settings object.
+	 * @return Settings
+	 */
+	public function getSettings();
+	
 	
 }
 
