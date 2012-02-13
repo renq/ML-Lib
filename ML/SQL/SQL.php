@@ -187,12 +187,7 @@ class SQL {
 			$query = $this->strategy->update($table, $params, $idColumn);
 			$params[] = $id;
 			$this->connection->query($query, $params);
-			if ($this->connection->getAffectedRows() > 0) {
-				return $id;
-			}
-			else {
-				throw new SqlException("No affected rows. Propably id=$id or idColumn=$idColumn is wrong.");
-			}
+			return $id;
 		}
 		else {
 			$query = $this->strategy->insert($table, $params);
