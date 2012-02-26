@@ -197,21 +197,19 @@ class SQL {
 	}
 	
 	
-    public function saveFromArray($table, $array, $idColumn = 'id') {
-        $params = array_intersect_key($array, $this->describe($table));
-        $id = 0;
-        if (isset($params[$idColumn])) {
-            $id = $params[$idColumn];
-            unset($params[$idColumn]);
-        }
-        return $this->save($table, $params, $id);
-    }
-    
-    
-    public function saveFromRequest($table, $extraParams = array(), $idColumn = 'id') {
-        return $this->saveFromArray($table, array_merge($_REQUEST, $extraParams), $idColumn);
-    }
-    
+	public function saveFromRequest($table, $extraParams = array(), $idColumn = 'id') {
+		$params = array();
+		foreach (array_intersect(array_keys($this->describe($table)), array_keys($_REQUEST)) as $key) {
+			$params[$key] = $_REQUEST[$key];
+		}
+		
+		$id = 0;
+		if (isset($params[$idColumn])) {
+			$id = $params[$idColumn];
+		}
+		$params = array_merge($params, $extraParams);
+		return $this->save($table, $params, $id);
+	}
 	
 	/**
 	 * Delete row(s) from table by id. 
@@ -235,15 +233,6 @@ class SQL {
 	 */
 	public function query($query, array $params = array()) {
 		return $this->connection->query($query, $params);
-	}
-	
-	
-	/**
-	 * Generate question marks.
-	 * @param int $num
-	 */
-	public function qm($num) {
-	    return $this->getStrategy()->qm($num);
 	}
 	
 	
@@ -279,12 +268,31 @@ class SQL {
 		return $this->connection;
 	}
 	
+	
+	/**
+	* Sets connection object.
+	* @param Connection $connection
+	*/
+	public function setConnection(Connection $connection) {
+	    $this->connection = $connection;
+	}
+	
+	
 	/**
 	 * Returns strategy object.
 	 * @return Strategy
 	 */
 	public function getStrategy() {
 		return $this->strategy;
+	}
+	
+	
+	/**
+	* Sets strategy object.
+	* @param Strategy $strategy
+	*/
+	public function setStrategy(Strategy $strategy) {
+	    $this->strategy = $strategy;
 	}
 	
 	

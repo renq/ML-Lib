@@ -80,4 +80,9 @@ class Connection_Decorator implements Connection {
 	}
 	
 	
+	public function setSettings(Settings $settings) {
+	    $this->decorated->setSettings($settings);
+	}
+	
+	
 }

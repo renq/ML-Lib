@@ -92,6 +92,12 @@ interface Connection {
 	 */
 	public function getSettings();
 	
+	/**
+	* Sets settings object
+	* @param Settings $settings 
+	*/
+	public function setSettings(Settings $settings);
+	
 	
 }
 
