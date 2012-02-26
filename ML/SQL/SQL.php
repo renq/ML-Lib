@@ -187,12 +187,7 @@ class SQL {
 			$query = $this->strategy->update($table, $params, $idColumn);
 			$params[] = $id;
 			$this->connection->query($query, $params);
-			if ($this->connection->getAffectedRows() > 0) {
-				return $id;
-			}
-			else {
-				throw new SqlException("No affected rows. Propably id=$id or idColumn=$idColumn is wrong.");
-			}
+			return $id;
 		}
 		else {
 			$query = $this->strategy->insert($table, $params);
@@ -202,19 +197,21 @@ class SQL {
 	}
 	
 	
-	public function saveFromRequest($table, $extraParams = array(), $idColumn = 'id') {
-		$params = array();
-		foreach (array_intersect(array_keys($this->describe($table)), array_keys($_REQUEST)) as $key) {
-			$params[$key] = $_REQUEST[$key];
-		}
-		
-		$id = 0;
-		if (isset($params[$idColumn])) {
-			$id = $params[$idColumn];
-		}
-		$params = array_merge($params, $extraParams);
-		return $this->save($table, $params, $id);
-	}
+    public function saveFromArray($table, $array, $idColumn = 'id') {
+        $params = array_intersect_key($array, $this->describe($table));
+        $id = 0;
+        if (isset($params[$idColumn])) {
+            $id = $params[$idColumn];
+            unset($params[$idColumn]);
+        }
+        return $this->save($table, $params, $id);
+    }
+    
+    
+    public function saveFromRequest($table, $extraParams = array(), $idColumn = 'id') {
+        return $this->saveFromArray($table, array_merge($_REQUEST, $extraParams), $idColumn);
+    }
+    
 	
 	/**
 	 * Delete row(s) from table by id. 
@@ -238,6 +235,15 @@ class SQL {
 	 */
 	public function query($query, array $params = array()) {
 		return $this->connection->query($query, $params);
+	}
+	
+	
+	/**
+	 * Generate question marks.
+	 * @param int $num
+	 */
+	public function qm($num) {
+	    return $this->getStrategy()->qm($num);
 	}
 	
 	
