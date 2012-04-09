@@ -1,13 +1,13 @@
 <?php
 
-require_once(dirname(__FILE__) . '/FormAutoload.php');
+namespace ML\Forms;
 
 
-class AF_Form extends AF_FormElement {
+class Form extends Element\Form {
 
 
-	public function __construct() {
-		parent::__construct();
+	public function __construct($name = '') {
+		parent::__construct($name);
 	}
 
 	/**
@@ -21,7 +21,7 @@ class AF_Form extends AF_FormElement {
 	public function add($type, $name, $label = false, $validators = array()) {
 		$class = $type;
 		$class[0] = strtoupper($type[0]);
-		$class = "AF_{$class}Element";
+		$class = "Element\{$class}";
 		if (class_exists($class)) {
 			$object = new $class($label, $validators);
 			if ($type == 'multipleselect')
