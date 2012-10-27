@@ -43,14 +43,5 @@ abstract class BaseConnection implements Connection {
 	}
 	
 	
-	/**
-	* Sets settings object.
-	* @param Settings $settigns
-	*/
-	public function setSettings(Settings $settings) {
-	    $this->settings = $settings;
-	}
-	
-	
 }
 

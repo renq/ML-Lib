@@ -47,7 +47,7 @@ class Connection_Decorator_Debug extends Connection_Decorator {
 
 	private function buildQuery($query, $params) {
 		$count = 0;
-		$query = str_replace(array('%', '?'), array('%%', '%s'), $query, $count);
+		$query = str_replace(array('%', '?'), array('%%', "'%s'"), $query, $count);
 		foreach ($params as $param) {
 			$param = $this->escape($param);
 		}

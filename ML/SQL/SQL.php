@@ -197,18 +197,25 @@ class SQL {
 	}
 	
 	
-	public function saveFromRequest($table, $extraParams = array(), $idColumn = 'id') {
-		$params = array();
-		foreach (array_intersect(array_keys($this->describe($table)), array_keys($_REQUEST)) as $key) {
-			$params[$key] = $_REQUEST[$key];
-		}
-		
+	public function saveFromArray($table, $array, $idColumn = 'id') {
+		$params = array_intersect_key($array, $this->describe($table));
 		$id = 0;
 		if (isset($params[$idColumn])) {
 			$id = $params[$idColumn];
+			unset($params[$idColumn]);
 		}
-		$params = array_merge($params, $extraParams);
-		return $this->save($table, $params, $id);
+		return $this->save($table, $params, $id, $idColumn);
+	}
+	
+	
+	/**
+	 * @deprecated
+	 * @param string $table
+	 * @param array $extraParams
+	 * @param string|int $idColumn
+	 */
+	public function saveFromRequest($table, $extraParams = array(), $idColumn = 'id') {
+		return $this->saveFromArray($table, array_merge($_REQUEST, $extraParams), $idColumn);
 	}
 	
 	/**
@@ -257,6 +264,11 @@ class SQL {
 			return $result;
 		}
 		throw new Exception("Describe fail. Probably table '$table' doesn't exists.");
+	}
+	
+
+	public function qm($num) {
+		return $this->getStrategy()->qm($num);
 	}
 	
 	
