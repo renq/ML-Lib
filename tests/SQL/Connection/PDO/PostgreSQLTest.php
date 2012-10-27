@@ -23,12 +23,14 @@ class SqlConnectionPDOPostgreSQLTest extends PHPUnit_Framework_TestCase {
 	
 	
 	public function testConnect() {
+	    if (!TEST_PGSQL) return;
 		$this->connection->connect();
 		$this->assertTrue($this->connection->getHandle() instanceof \PDO);
 	}
 	
 	
 	public function testConnectFail() {
+	    if (!TEST_PGSQL) return;
 		$this->setExpectedException('ML\SQL\Exception');
 		$settings = new Settings('pgsql://super_mega_user:pass@localhost/fake_db');
 		$connection = new Connection_PDO_PostgreSQL($settings);
@@ -37,6 +39,7 @@ class SqlConnectionPDOPostgreSQLTest extends PHPUnit_Framework_TestCase {
 	
 	
     public function testPasswordHide() {
+        if (!TEST_PGSQL) return;
     	$password = $this->connection->getSettings()->getPassword();
     	$this->connection->connect();
     	$hiddenPassword = $this->connection->getSettings()->getPassword();
@@ -45,6 +48,7 @@ class SqlConnectionPDOPostgreSQLTest extends PHPUnit_Framework_TestCase {
     
     
     public function testSerialSequence() {
+        if (!TEST_PGSQL) return;
     	$this->connection->connect();
     	$this->connection->query("DROP TABLE IF EXISTS cats");
     	$this->connection->query("
@@ -58,6 +62,7 @@ class SqlConnectionPDOPostgreSQLTest extends PHPUnit_Framework_TestCase {
     
     
     public function testLastInsertId() {
+        if (!TEST_PGSQL) return;
     	$this->connection->connect();
     	$this->connection->query("DROP TABLE cats");
     	$this->connection->query("
@@ -72,6 +77,7 @@ class SqlConnectionPDOPostgreSQLTest extends PHPUnit_Framework_TestCase {
     
     
     public function testSerialSequenceCache() {
+        if (!TEST_PGSQL) return;
     	$settings = $this->getMock('ML\SQL\Settings');
     	$connection = $this->getMock('ML\SQL\Connection_PDO_PostgreSQL', array('query', 'connect', 'fetch'), array($settings));
     	$connection->expects($this->once())->method('query');

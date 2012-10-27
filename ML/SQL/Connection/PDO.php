@@ -67,7 +67,7 @@ abstract class Connection_PDO extends BaseConnection {
 			$sth->execute(array_values($params));
 		}
 		catch (\PDOException $e) {
-			throw new SqlException('Query error: '.$e->getMessage().";\nQuery: $query\n\nParameters: ".print_r($params, true), (int)$e->getCode(), $e);
+			throw new Exception('Query error: '.$e->getMessage().";\nQuery: $query\n\nParameters: ".print_r($params, true), (int)$e->getCode(), $e);
 		}
 		$this->lastStatement = $sth;
 		return $sth;
@@ -79,7 +79,7 @@ abstract class Connection_PDO extends BaseConnection {
 			return $this->lastStatement->rowCount();
 		}
 		else {
-			throw new SqlException("No query was executed, so method getRowsAffected is pointless in this moment.");
+			throw new Exception("No query was executed, so method getRowsAffected is pointless in this moment.");
 		}
 	}
 	

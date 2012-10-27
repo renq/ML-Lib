@@ -55,5 +55,3 @@ abstract class Layout {
 	
 }
 
-
-?>

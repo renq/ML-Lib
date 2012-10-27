@@ -26,7 +26,7 @@ class Connection_MySQL extends BaseConnection {
 		
 		$this->handle = @mysql_connect($host, $username, $password);
 		if (!$this->handle) {
-			throw new SqlException('Can\'t open database: '.mysql_error());
+			throw new Exception('Can\'t open database: '.mysql_error());
 		}			
 		mysql_query("USE {$database}", $this->handle);
 		mysql_query("SET character_set_client=utf8", $this->handle);
@@ -96,7 +96,7 @@ class Connection_MySQL extends BaseConnection {
 		
 		$result = mysql_query($query, $this->handle);
 		if (mysql_errno()) {
-			throw new SqlException("Query error: $query\n\n" . mysql_errno($this->handle) . ": " . mysql_error($this->handle));
+			throw new Exception("Query error: $query\n\n" . mysql_errno($this->handle) . ": " . mysql_error($this->handle));
 		}
 		$this->lastQuery = $query;
 		return $result;
@@ -105,7 +105,7 @@ class Connection_MySQL extends BaseConnection {
 	
 	public function getAffectedRows() {
 		if ($this->lastQuery == null) {
-			throw new SqlException("No query was executed, so method getRowsAffected is pointless in this moment.");
+			throw new Exception("No query was executed, so method getRowsAffected is pointless in this moment.");
 		}
 		return mysql_affected_rows($this->handle);
 	}

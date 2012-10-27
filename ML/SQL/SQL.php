@@ -256,7 +256,7 @@ class SQL {
 			}
 			return $result;
 		}
-		throw new SqlException("Desribe fail. Probably table '$table' doesn't exists.");
+		throw new Exception("Describe fail. Probably table '$table' doesn't exists.");
 	}
 	
 	

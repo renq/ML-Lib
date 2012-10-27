@@ -30,5 +30,3 @@ class Template extends Layout {
 	
 }
 
-
-?>

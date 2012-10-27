@@ -79,7 +79,7 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     
     
 	public function testQuerySqlFail() {
-    	$this->setExpectedException('ML\SQL\SqlException');
+    	$this->setExpectedException('ML\SQL\Exception');
     	$this->connection->query("SELECT * FROM ninja_table");
     }
     
@@ -150,7 +150,7 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     
     
 	public function testGetAffectedNoQuery() {
-		$this->setExpectedException('\ml\sql\SqlException');
+		$this->setExpectedException('\ml\sql\Exception');
     	$this->connection->getAffectedRows();
     }
     

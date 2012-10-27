@@ -6,8 +6,6 @@ namespace ML\Forms\Element;
 abstract class Base {
 
 
-	private $validAttributes = array();
-
 	private $attributes = array();
 
 	private $name;

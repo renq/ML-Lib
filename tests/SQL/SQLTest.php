@@ -11,35 +11,36 @@ class SQLTest extends PHPUnit_Framework_TestCase {
     
     public function testCreateByDSNMySQL() {
     	$dsn = 'mysql://root:pass@localhost/db';
-    	$sql = \ml\sql\SQL::createByDSN($dsn);
-    	$this->assertTrue($sql instanceof \ml\sql\SQL, 'SQL::createByDSN should returns instance of class SQL');
-    	$this->assertTrue($sql->getConnection() instanceof \ml\sql\Connection_PDO_MySQL, 'Connection should be an instance of Connection_PDO_MySQL');
-    	$this->assertTrue($sql->getStrategy() instanceof \ml\sql\Strategy_MySQL, 'Strategy should be an instance of Strategy_MySQL');
+    	$sql = \ML\SQL\SQL::createByDSN($dsn);
+    	$this->assertTrue($sql instanceof \ML\SQL\SQL, 'SQL::createByDSN should returns instance of class SQL');
+    	$this->assertTrue($sql->getConnection() instanceof \ML\SQL\Connection_PDO_MySQL, 'Connection should be an instance of Connection_PDO_MySQL');
+    	$this->assertTrue($sql->getStrategy() instanceof \ML\SQL\Strategy_MySQL, 'Strategy should be an instance of Strategy_MySQL');
     }
     
     
 	public function testCreateByDSNPostgresql() {
+	    if (!TEST_PGSQL) return;
     	$dsn = 'pgsql://root:pass@localhost/db';
-    	$sql = \ml\sql\SQL::createByDSN($dsn);
-    	$this->assertTrue($sql instanceof \ml\sql\SQL, 'SQL::createByDSN should returns instance of class SQL');
-    	$this->assertTrue($sql->getConnection() instanceof \ml\sql\Connection_PDO_PostgreSQL, 'Connection should be an instance of Connection_PDO_PostgreSQL');
-    	$this->assertTrue($sql->getStrategy() instanceof \ml\sql\Strategy_PostgreSQL, 'Strategy should be an instance of Strategy_PostgreSQL');
+    	$sql = \ML\SQL\SQL::createByDSN($dsn);
+    	$this->assertTrue($sql instanceof \ML\SQL\SQL, 'SQL::createByDSN should returns instance of class SQL');
+    	$this->assertTrue($sql->getConnection() instanceof \ML\SQL\Connection_PDO_PostgreSQL, 'Connection should be an instance of Connection_PDO_PostgreSQL');
+    	$this->assertTrue($sql->getStrategy() instanceof \ML\SQL\Strategy_PostgreSQL, 'Strategy should be an instance of Strategy_PostgreSQL');
     }
     
     
 	public function testCreateByDSNSqlite() {
     	$dsn = 'sqlite:///some/file/';
-    	$sql = \ml\sql\SQL::createByDSN($dsn);
-    	$this->assertTrue($sql instanceof \ml\sql\SQL, 'SQL::createByDSN should returns instance of class SQL');
-    	$this->assertTrue($sql->getConnection() instanceof \ml\sql\Connection_PDO_Sqlite, 'Connection should be an instance of Connection_PDO_PostgreSQL');
-    	$this->assertTrue($sql->getStrategy() instanceof \ml\sql\Strategy_Sqlite, 'Strategy should be an instance of Strategy_Sqlite');
+    	$sql = \ML\SQL\SQL::createByDSN($dsn);
+    	$this->assertTrue($sql instanceof \ML\SQL\SQL, 'SQL::createByDSN should returns instance of class SQL');
+    	$this->assertTrue($sql->getConnection() instanceof \ML\SQL\Connection_PDO_Sqlite, 'Connection should be an instance of Connection_PDO_PostgreSQL');
+    	$this->assertTrue($sql->getStrategy() instanceof \ML\SQL\Strategy_Sqlite, 'Strategy should be an instance of Strategy_Sqlite');
     }
     
     
 	public function testCreateByDSNUnknownDatabase() {
-		$this->setExpectedException('\ml\sql\Exception');
+		$this->setExpectedException('\ML\SQL\Exception');
     	$dsn = 'someUnknownDatabase://someUser@someServer/someDtabase/';
-    	$sql = \ml\sql\SQL::createByDSN($dsn);
+    	$sql = \ML\SQL\SQL::createByDSN($dsn);
     }
     
     
@@ -123,7 +124,6 @@ class SQLTest extends PHPUnit_Framework_TestCase {
     	$settings = $this->getMock('ML\SQL\Settings');
     	$connection = $this->getMock('ML\SQL\Connection_PDO_MySQL', array(), array($settings));
 		$connection->expects($this->once())->method('query');
-		$connection->expects($this->once())->method('getAffectedRows')->will($this->returnValue(1));
     	$strategy = $this->getMock('ML\SQL\Strategy_MySQL', array(), array($connection));
 		$strategy->expects($this->once())->method('update');
     	$sql = new SQL($connection, $strategy);
@@ -132,13 +132,12 @@ class SQLTest extends PHPUnit_Framework_TestCase {
     
     
 	public function testSaveUpdateWithWrongID() {
-		$this->setExpectedException('\ml\sql\SqlException');
+		$this->setExpectedException('\ML\SQL\Exception');
 		$table = 'cat';
 		$params = array('name' => 'Nennek', 'colour' => 'black');
     	$settings = $this->getMock('ML\SQL\Settings');
     	$connection = $this->getMock('ML\SQL\Connection_PDO_MySQL', array(), array($settings));
 		$connection->expects($this->once())->method('query');
-		$connection->expects($this->once())->method('getAffectedRows')->will($this->returnValue(0));
     	$strategy = $this->getMock('ML\SQL\Strategy_MySQL', array(), array($connection));
     	$sql = new SQL($connection, $strategy);
     	$sql->save($table, $params, 100);
@@ -264,7 +263,7 @@ class SQLTest extends PHPUnit_Framework_TestCase {
 			array('table_catalog'=>null,'table_schema'=>'sql','table_name'=>'table','column_name'=>'name','ordinal_position'=>2,'column_default'=>'','is_nullable'=>'no','data_type'=>'varchar','character_maximum_length'=>255,'character_octet_length'=>765,'numeric_precision'=>null,'numeric_scale'=>null,'character_set_name'=>'utf8','collation_name'=>'utf8_general_ci','column_type'=>'varchar(255)','column_key'=>'','extra'=>'','privileges'=>'select,insert,update,references','column_comment'=>''),
 			array('table_catalog'=>null,'table_schema'=>'sql','table_name'=>'table','column_name'=>'active','ordinal_position'=>3,'column_default'=>null,'is_nullable'=>'no','data_type'=>'tinyint','character_maximum_length'=>null,'character_octet_length'=>null,'numeric_precision'=>3,'numeric_scale'=>0,'character_set_name'=>null,'collation_name'=>null,'column_type'=>'tinyint(1)','column_key'=>'','extra'=>'','privileges'=>'select,insert,update,references','column_comment'=>'')
 		);
-		$this->setExpectedException('ML\SQL\SqlException');
+		$this->setExpectedException('ML\SQL\Exception');
 
     	$settings = $this->getMock('ML\SQL\Settings');
     	$connection = $this->getMock('ML\SQL\Connection_PDO_Sqlite', array('connect'), array($settings));

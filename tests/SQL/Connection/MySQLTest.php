@@ -42,7 +42,7 @@ class SqlConnectionMySQLTest extends PHPUnit_Framework_TestCase {
 	
 	
 	public function testConnectFail() {
-		$this->setExpectedException('ML\SQL\SqlException');
+		$this->setExpectedException('ML\SQL\Exception');
 		$settings = new Settings('mysql://root:fake_pass@localhost/fake_db');
 		$connection = new Connection_MySQL($settings);
     	$connection->connect();
@@ -96,7 +96,7 @@ class SqlConnectionMySQLTest extends PHPUnit_Framework_TestCase {
     
     
 	public function testQuerySqlFail() {
-    	$this->setExpectedException('ML\SQL\SqlException');
+    	$this->setExpectedException('ML\SQL\Exception');
     	$this->connection->query("SELECT * FROM ninja_table");
     }
     
@@ -165,7 +165,7 @@ class SqlConnectionMySQLTest extends PHPUnit_Framework_TestCase {
 		$db  = $config['mysql_db'];
 		$settings = new Settings($db);
 		$connection = new Connection_MySQL($settings);
-		$this->setExpectedException('\ml\sql\SqlException');
+		$this->setExpectedException('\ml\sql\Exception');
     	$connection->getAffectedRows();
     }
     
