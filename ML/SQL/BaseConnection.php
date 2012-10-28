@@ -43,5 +43,25 @@ abstract class BaseConnection implements Connection {
 	}
 	
 	
+	protected function parseQueryArrays($query, array $params) {
+	    $newQuery = '';
+	    $newParams = array();
+	    $split = explode('?', $query);
+	    foreach ($params as $v) {
+	        $newQuery .= array_shift($split);
+	        if (is_array($v)) {
+	            $newQuery .= '(' . implode(', ', array_fill(0, count($v), '?')) . ')';
+	            $newParams = array_merge($newParams, $v);
+	        }
+	        else {
+	            $newQuery .= '?';
+	            $newParams[] = $v;
+	        }
+	    }
+	    $newQuery .= array_shift($split);
+	    return array($newQuery, $newParams);
+	}
+	
+	
 }
 

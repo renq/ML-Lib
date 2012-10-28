@@ -93,5 +93,6 @@ interface Connection {
 	public function getSettings();
 	
 	
+	
 }
 

@@ -68,6 +68,17 @@ class SqlConnectionPDOTest extends PHPUnit_Framework_TestCase {
     }
     
     
+    public function testQueryBindArray() {
+        $this->createTable();
+        $sth = $this->connection->query("SELECT * FROM cat WHERE id IN ?", array(array(1,2)));
+        $result = array();
+        while ($res = $this->connection->fetch($sth)) {
+            $result[] = $res;
+        }
+        $this->assertEquals(2, count($result));
+    }
+    
+    
     public function testEscape() {
     	$this->assertEquals("'Simon''s Cat'", $this->connection->escape("Simon's Cat"));
     	$this->assertEquals(12, $this->connection->escape(12));

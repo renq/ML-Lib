@@ -267,6 +267,10 @@ class SQL {
 	}
 	
 
+	/**
+	 * @deprecated
+	 * @param unknown_type $num
+	 */
 	public function qm($num) {
 		return $this->getStrategy()->qm($num);
 	}

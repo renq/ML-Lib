@@ -57,12 +57,13 @@ abstract class Connection_PDO extends BaseConnection {
 	
 	public function query($query, array $params = array()) {
 		$this->connect();
-		try {			
+		try {
 			$numberOfPlaceholders = substr_count($query, '?');
 			$numberOfParams = count($params);
 			if ($numberOfPlaceholders != $numberOfParams) {
 				throw new BindException("Query error: wrong number of bind parameters; should be $numberOfPlaceholders; $numberOfParams given;\n$query");
 			}
+			list($query, $params) = $this->parseQueryArrays($query, $params);
 			$sth = $this->handle->prepare($query);
 			$sth->execute(array_values($params));
 		}
